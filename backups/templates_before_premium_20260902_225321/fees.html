@@ -1,0 +1,160 @@
+
+<style>
+.admin-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.admin-edit-btn,
+.admin-delete-btn{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+}
+.admin-edit-btn{
+    background:#d4a72c;
+    color:#fff !important;
+    border:1px solid #c29418;
+}
+.admin-edit-btn:hover{
+    background:#b8860b;
+}
+.admin-delete-btn{
+    background:#fff5f5;
+    color:#b42318;
+    border:1px solid #f0b7b2;
+}
+.admin-delete-btn:hover{
+    background:#ffe8e6;
+}
+.admin-delete-form{
+    display:inline;
+    margin:0;
+}
+</style>
+<script>
+function confirmDelete(name){
+    return confirm("Are you sure you want to delete " + name + "? This action cannot be undone.");
+}
+</script>
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Student Fees</h1>
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<select name="student_id" required>
+
+<option value="">
+Select Student
+</option>
+
+{% for s in students %}
+
+<option value="{{s.id}}">
+{{s.name}} — {{s.student_id}}
+</option>
+
+{% endfor %}
+
+</select>
+
+<input
+name="fee_month"
+placeholder="Month"
+required
+>
+
+<input
+name="amount"
+type="number"
+step="0.01"
+placeholder="Total Fee"
+required
+>
+
+<input
+name="paid_amount"
+type="number"
+step="0.01"
+placeholder="Paid Amount"
+>
+
+<input
+name="payment_date"
+type="date"
+>
+
+<input
+name="note"
+placeholder="Note"
+>
+
+<button class="btn primary">
+SAVE FEE
+</button>
+
+</form>
+
+</div>
+
+<div class="card tablewrap">
+
+<table>
+
+<tr>
+<th>Student</th>
+<th>Month</th>
+<th>Amount</th>
+<th>Paid</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for f in fees %}
+
+<tr>
+
+<td>{{f.name}}</td>
+
+<td>{{f.fee_month}}</td>
+
+<td>৳{{f.amount}}</td>
+
+<td>৳{{f.paid_amount}}</td>
+
+<td>{{f.status}}</td>
+
+<td>
+
+<form
+method="post"
+action="/fees/{{f.id}}/delete"
+>
+
+<button class="danger">
+Delete
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

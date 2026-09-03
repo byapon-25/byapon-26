@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}BYAPON Coaching Center{% endblock %}
+
+{% block content %}
+
+<section class="home-hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="pulse-dot"></span>
+            SMART COACHING MANAGEMENT SYSTEM
+        </div>
+
+        <h1>
+            Learn Better.<br>
+            <span>Perform Better.</span>
+        </h1>
+
+        <p class="hero-description">
+            A powerful digital platform for managing students,
+            teachers, attendance, examinations, fees and academic
+            performance — all in one place.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/login" class="hero-btn primary-btn">
+                <span>Enter Portal</span>
+                <b>→</b>
+            </a>
+
+            <a href="#features" class="hero-btn secondary-btn">
+                Explore System
+            </a>
+        </div>
+
+        <div class="trust-row">
+            <div>
+                <strong>01</strong>
+                <span>Smart Management</span>
+            </div>
+            <div>
+                <strong>02</strong>
+                <span>Academic Tracking</span>
+            </div>
+            <div>
+                <strong>03</strong>
+                <span>Secure Portals</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+
+        <div class="dashboard-preview">
+
+            <div class="preview-top">
+                <div>
+                    <small>BYAPON CMS</small>
+                    <strong>Academic Overview</strong>
+                </div>
+                <span class="live-dot">LIVE</span>
+            </div>
+
+            <div class="preview-grid">
+
+                <div class="mini-stat">
+                    <span>Students</span>
+                    <strong>∞</strong>
+                    <small>Organized</small>
+                </div>
+
+                <div class="mini-stat">
+                    <span>Results</span>
+                    <strong>✓</strong>
+                    <small>Tracked</small>
+                </div>
+
+                <div class="mini-stat wide">
+                    <span>Performance</span>
+                    <div class="progress">
+                        <i></i>
+                    </div>
+                    <small>Smart academic tracking</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="features" class="feature-section">
+
+    <div class="section-heading">
+        <span>POWERFUL FEATURES</span>
+        <h2>Everything your coaching center needs.</h2>
+        <p>Designed to make daily academic management faster, cleaner and smarter.</p>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">01</div>
+            <h3>Student Management</h3>
+            <p>Add, edit, search and manage student information with ease.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">02</div>
+            <h3>Attendance</h3>
+            <p>Track daily attendance and keep academic records organized.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">03</div>
+            <h3>Exams & Results</h3>
+            <p>Manage exams, marks and professional student marksheets.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">04</div>
+            <h3>Fees & Finance</h3>
+            <p>Keep fees, income and expenses under complete control.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">05</div>
+            <h3>Teacher Portal</h3>
+            <p>Give teachers a dedicated workspace for their classes.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">06</div>
+            <h3>Student Portal</h3>
+            <p>Students can access their academic information from one place.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="portal-section">
+
+    <div class="section-heading">
+        <span>ONE SYSTEM • THREE PORTALS</span>
+        <h2>Built for everyone.</h2>
+    </div>
+
+    <div class="portal-grid">
+
+        <a href="/login?role=admin" class="portal-card admin-card">
+            <div class="portal-number">01</div>
+            <div>
+                <small>MANAGEMENT</small>
+                <h3>Admin Portal</h3>
+                <p>Complete control over the coaching center.</p>
+            </div>
+            <b>→</b>
+        </a>
+
+        <a href="/login?role=teacher" class="portal-card teacher-card">
+            <div class="portal-number">02</div>
+            <div>
+                <small>ACADEMIC</small>
+                <h3>Teacher Portal</h3>
+                <p>Manage classes, attendance and academic work.</p>
+            </div>
+            <b>→</b>
+        </a>
+
+        <a href="/login?role=student" class="portal-card student-card">
+            <div class="portal-number">03</div>
+            <div>
+                <small>LEARNING</small>
+                <h3>Student Portal</h3>
+                <p>View results, attendance, fees and routine.</p>
+            </div>
+            <b>→</b>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="cta-section">
+
+    <div>
+        <span>READY TO GET STARTED?</span>
+        <h2>Take your coaching center digital.</h2>
+    </div>
+
+    <a href="/login" class="hero-btn primary-btn">
+        Open BYAPON CMS <b>→</b>
+    </a>
+
+</section>
+
+{% endblock %}

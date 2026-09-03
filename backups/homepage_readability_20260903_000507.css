@@ -1,0 +1,789 @@
+:root{
+  --bp-blue:#1456a0;
+  --bp-blue-dark:#0b3470;
+  --bp-blue-light:#eaf3ff;
+  --bp-gold:#c79a2b;
+  --bp-gold-light:#fff7df;
+  --bp-white:#ffffff;
+  --bp-bg:#f4f7fb;
+  --bp-text:#172033;
+  --bp-muted:#667085;
+  --bp-border:#e4e9f1;
+  --bp-shadow:0 12px 35px rgba(20,86,160,.10);
+  --bp-radius:18px;
+}
+
+html,body{
+  margin:0!important;
+  padding:0!important;
+  background:var(--bp-bg)!important;
+  color:var(--bp-text)!important;
+  font-family:Inter,Arial,sans-serif!important;
+}
+
+/* BACKGROUND OVERRIDE */
+body{
+  background:
+    radial-gradient(circle at 5% 0%,rgba(199,154,43,.10),transparent 25%),
+    radial-gradient(circle at 95% 10%,rgba(20,86,160,.10),transparent 30%),
+    var(--bp-bg)!important;
+}
+
+.bg-glow{
+  opacity:.18!important;
+  pointer-events:none!important;
+}
+
+/* NAVIGATION */
+.premium-nav{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  min-height:72px!important;
+  padding:12px 28px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:20px!important;
+  background:rgba(255,255,255,.96)!important;
+  border-bottom:1px solid var(--bp-border)!important;
+  box-shadow:0 5px 22px rgba(16,24,40,.07)!important;
+  backdrop-filter:blur(14px)!important;
+}
+
+.logo{
+  display:flex!important;
+  align-items:center!important;
+  gap:11px!important;
+  text-decoration:none!important;
+  color:var(--bp-blue-dark)!important;
+}
+
+.logo-mark{
+  width:43px!important;
+  height:43px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:13px!important;
+  background:linear-gradient(135deg,var(--bp-blue-dark),var(--bp-blue))!important;
+  color:#fff!important;
+  font-size:23px!important;
+  font-weight:900!important;
+  box-shadow:0 7px 18px rgba(20,86,160,.22)!important;
+  border:2px solid var(--bp-gold)!important;
+}
+
+.logo strong{
+  display:block!important;
+  color:var(--bp-blue-dark)!important;
+  font-size:18px!important;
+  letter-spacing:1px!important;
+}
+
+.logo small{
+  display:block!important;
+  margin-top:1px!important;
+  color:var(--bp-gold)!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  letter-spacing:1.5px!important;
+}
+
+.nav-links{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+}
+
+.nav-links a{
+  padding:9px 12px!important;
+  border-radius:10px!important;
+  color:var(--bp-blue-dark)!important;
+  background:transparent!important;
+  text-decoration:none!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  transition:.2s ease!important;
+}
+
+.nav-links a:hover{
+  background:var(--bp-blue-light)!important;
+  color:var(--bp-blue)!important;
+  transform:translateY(-1px)!important;
+}
+
+.nav-links .logout-link{
+  color:#a66b00!important;
+  background:var(--bp-gold-light)!important;
+  border:1px solid #ecd48e!important;
+}
+
+.nav-links .nav-login{
+  color:#fff!important;
+  background:linear-gradient(135deg,var(--bp-blue-dark),var(--bp-blue))!important;
+}
+
+/* MAIN */
+.page-shell{
+  width:min(1400px,94%)!important;
+  margin:0 auto!important;
+  padding:30px 0 45px!important;
+}
+
+/* HEADINGS */
+.page-shell h1,
+.page-shell h2,
+.page-shell h3,
+.page-shell h4{
+  color:var(--bp-blue-dark)!important;
+  font-weight:800!important;
+}
+
+.page-shell h1{
+  position:relative!important;
+  margin-bottom:25px!important;
+}
+
+.page-shell h1:after,
+.page-shell h2:after{
+  content:""!important;
+  display:block!important;
+  width:58px!important;
+  height:3px!important;
+  margin-top:9px!important;
+  border-radius:5px!important;
+  background:linear-gradient(90deg,var(--bp-gold),var(--bp-blue))!important;
+}
+
+/* CARDS / PANELS */
+.card,
+.panel,
+.box,
+.content-card,
+.dashboard-card,
+.stat-card,
+.table-container,
+.form-container,
+.section-card{
+  background:#fff!important;
+  color:var(--bp-text)!important;
+  border:1px solid var(--bp-border)!important;
+  border-radius:var(--bp-radius)!important;
+  box-shadow:var(--bp-shadow)!important;
+}
+
+/* GENERIC DIVS WITH COMMON CARD CLASSES */
+.dashboard-card,
+.stat-card{
+  transition:.22s ease!important;
+}
+
+.dashboard-card:hover,
+.stat-card:hover{
+  transform:translateY(-3px)!important;
+  box-shadow:0 18px 42px rgba(20,86,160,.14)!important;
+}
+
+/* TABLE */
+table{
+  width:100%!important;
+  background:#fff!important;
+  border:1px solid var(--bp-border)!important;
+  border-radius:15px!important;
+  overflow:hidden!important;
+  border-collapse:separate!important;
+  border-spacing:0!important;
+  box-shadow:var(--bp-shadow)!important;
+}
+
+thead{
+  background:linear-gradient(135deg,var(--bp-blue-dark),var(--bp-blue))!important;
+}
+
+thead th{
+  color:#fff!important;
+  padding:13px 12px!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  border:none!important;
+}
+
+tbody td{
+  background:#fff!important;
+  color:var(--bp-text)!important;
+  padding:12px!important;
+  border-bottom:1px solid #edf0f5!important;
+}
+
+tbody tr:hover td{
+  background:#fffaf0!important;
+}
+
+tbody tr:last-child td{
+  border-bottom:none!important;
+}
+
+/* FORMS */
+form{
+  color:var(--bp-text)!important;
+}
+
+label{
+  color:var(--bp-blue-dark)!important;
+  font-weight:700!important;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  max-width:100%;
+  background:#fff!important;
+  color:var(--bp-text)!important;
+  border:1px solid #d8dee8!important;
+  border-radius:11px!important;
+  padding:11px 13px!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--bp-gold)!important;
+  box-shadow:0 0 0 3px rgba(199,154,43,.13)!important;
+}
+
+/* BUTTONS */
+button,
+.btn,
+.button,
+input[type="submit"],
+input[type="button"]{
+  border:none!important;
+  border-radius:10px!important;
+  padding:10px 16px!important;
+  font-weight:800!important;
+  cursor:pointer!important;
+  transition:.2s ease!important;
+}
+
+button:hover,
+.btn:hover,
+.button:hover,
+input[type="submit"]:hover{
+  transform:translateY(-1px)!important;
+}
+
+/* PRIMARY */
+button[type="submit"],
+input[type="submit"],
+.btn-primary,
+.primary-btn{
+  background:linear-gradient(135deg,var(--bp-blue-dark),var(--bp-blue))!important;
+  color:#fff!important;
+  box-shadow:0 6px 15px rgba(20,86,160,.18)!important;
+}
+
+/* EDIT */
+.admin-edit-btn,
+.edit-btn,
+a[href*="/edit"]{
+  color:#fff!important;
+  background:linear-gradient(135deg,#1769aa,#2584c7)!important;
+  text-decoration:none!important;
+  border-radius:9px!important;
+  font-weight:800!important;
+}
+
+/* DELETE */
+.admin-delete-btn,
+.delete-btn{
+  color:#fff!important;
+  background:linear-gradient(135deg,#c79a2b,#a87808)!important;
+  border-radius:9px!important;
+  font-weight:800!important;
+}
+
+/* PREMIUM EDIT PAGES */
+.premium-edit-page{
+  max-width:850px!important;
+  margin:25px auto!important;
+  padding:28px!important;
+  background:#fff!important;
+  border:1px solid var(--bp-border)!important;
+  border-radius:22px!important;
+  box-shadow:var(--bp-shadow)!important;
+}
+
+.premium-edit-page h2{
+  margin-top:0!important;
+  color:var(--bp-blue-dark)!important;
+}
+
+/* FLASH */
+.flash-stack{
+  margin-bottom:20px!important;
+}
+
+.flash{
+  background:#fff!important;
+  color:var(--bp-text)!important;
+  border:1px solid var(--bp-border)!important;
+  border-left:5px solid var(--bp-gold)!important;
+  border-radius:12px!important;
+  box-shadow:0 7px 20px rgba(16,24,40,.06)!important;
+}
+
+/* FOOTER */
+.premium-footer{
+  margin-top:35px!important;
+  padding:28px 20px!important;
+  text-align:center!important;
+  background:#fff!important;
+  border-top:1px solid var(--bp-border)!important;
+  color:var(--bp-muted)!important;
+}
+
+.premium-footer strong{
+  color:var(--bp-blue-dark)!important;
+}
+
+.premium-footer span{
+  color:var(--bp-gold)!important;
+  font-weight:800!important;
+}
+
+.premium-footer p{
+  color:var(--bp-muted)!important;
+}
+
+/* LINKS */
+.page-shell a{
+  color:var(--bp-blue)!important;
+}
+
+/* BADGES / STATUS */
+.badge,
+.status{
+  border-radius:20px!important;
+  font-weight:700!important;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .premium-nav{
+    position:relative!important;
+    padding:12px 15px!important;
+    align-items:flex-start!important;
+    flex-direction:column!important;
+  }
+
+  .nav-links{
+    width:100%!important;
+    justify-content:flex-start!important;
+    overflow-x:auto!important;
+    flex-wrap:nowrap!important;
+    padding-bottom:3px!important;
+  }
+
+  .nav-links a{
+    white-space:nowrap!important;
+  }
+
+  .page-shell{
+    width:94%!important;
+    padding-top:20px!important;
+  }
+
+  .table-container{
+    overflow-x:auto!important;
+  }
+
+  table{
+    min-width:650px!important;
+  }
+
+  .premium-edit-page{
+    padding:19px!important;
+    border-radius:16px!important;
+  }
+}
+
+@media(max-width:520px){
+  .logo strong{
+    font-size:16px!important;
+  }
+
+  .logo small{
+    font-size:8px!important;
+  }
+
+  .page-shell h1{
+    font-size:25px!important;
+  }
+}
+
+/* REMOVE COMMON DARK THEME COLORS */
+[class*="dark"],
+[class*="black"]{
+  color-scheme:light!important;
+}
+
+/* =========================================================
+   BYAPON PORTAL FINAL LIGHT THEME OVERRIDE
+   White + Premium Blue + Gold
+   NO BLACK / DARK PORTAL THEME
+   ========================================================= */
+
+html,
+body{
+    background:#f7faff !important;
+    color:#334155 !important;
+}
+
+body,
+main,
+.page-shell,
+.content,
+.dashboard-header,
+.dashboard-grid,
+.dashboard-menu,
+.menu-card,
+.dash-card,
+.card{
+    color:#334155 !important;
+}
+
+.dashboard-header,
+.dashboard-grid .dash-card,
+.dashboard-menu .menu-card{
+    background:#ffffff !important;
+    color:#334155 !important;
+    border-color:#dbe7f5 !important;
+}
+
+.dashboard-header h1,
+.dashboard-header h2,
+.dashboard-header h3,
+.dash-card h1,
+.dash-card h2,
+.dash-card h3,
+.menu-card h1,
+.menu-card h2,
+.menu-card h3{
+    color:#174ea6 !important;
+}
+
+.dashboard-header p,
+.dash-card p,
+.menu-card p{
+    color:#64748b !important;
+}
+
+.menu-card span{
+    color:#c79516 !important;
+}
+
+.menu-icon{
+    background:#eef5ff !important;
+    color:#2563eb !important;
+}
+
+input,
+select,
+textarea{
+    background:#ffffff !important;
+    color:#334155 !important;
+    border-color:#cbd8e8 !important;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#94a3b8 !important;
+}
+
+button,
+.btn,
+.btn.primary{
+    background:linear-gradient(135deg,#2563eb,#174ea6) !important;
+    color:#ffffff !important;
+}
+
+a{
+    color:#174ea6;
+}
+
+.premium-footer{
+    background:#ffffff !important;
+    color:#64748b !important;
+    border-top:1px solid #dbe7f5 !important;
+}
+
+.premium-nav{
+    background:rgba(255,255,255,.97) !important;
+    color:#174ea6 !important;
+    border-bottom:1px solid #dbe7f5 !important;
+}
+
+.premium-nav a{
+    color:#174ea6 !important;
+}
+
+.premium-nav a:hover{
+    color:#c79516 !important;
+}
+
+/* Attendance actions must remain visible */
+.att-actions{
+    display:flex !important;
+    align-items:center !important;
+    gap:7px !important;
+    flex-wrap:wrap !important;
+}
+
+.att-edit{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    background:#fff8df !important;
+    color:#946b00 !important;
+    border:1px solid #e7c85b !important;
+}
+
+.att-delete{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    background:#fff1f1 !important;
+    color:#b42318 !important;
+    border:1px solid #efb4b0 !important;
+}
+
+
+
+/* =========================================================
+   BYAPON FINAL CONTRAST RULE
+   BLUE BACKGROUND = WHITE TEXT
+   ========================================================= */
+
+button,
+.btn,
+.btn.primary,
+.exam-mark-btn,
+.save-marks-btn{
+    color:#fff !important;
+}
+
+[style*="background:#2563eb"],
+[style*="background:#174ea6"],
+[style*="background:blue"]{
+    color:#fff !important;
+}
+
+.nav,
+.navbar,
+.header,
+.hero,
+.premium-nav,
+.premium-hero,
+.blue-section{
+    color:#fff !important;
+}
+
+.nav *,
+.navbar *,
+.header *,
+.hero *,
+.premium-nav *,
+.premium-hero *,
+.blue-section *{
+    color:inherit;
+}
+
+/* =========================================================
+   BYAPON — FINAL NO BLACK UI OVERRIDE
+   Premium White + Blue + Gold
+   ========================================================= */
+
+/* Remove black button / edit accents */
+button,
+.btn,
+.edit-btn,
+.action-btn,
+.btn.small{
+    background:linear-gradient(135deg,#2563eb,#174ea6) !important;
+    color:#ffffff !important;
+    border-color:#2563eb !important;
+}
+
+/* Delete remains visible but not black */
+.danger,
+.delete-btn{
+    background:#fff1f1 !important;
+    color:#b42318 !important;
+    border:1px solid #efb4b0 !important;
+}
+
+/* Dark form panels become white */
+.card,
+.panel,
+.form-card,
+.table-card{
+    background:#ffffff !important;
+    color:#334155 !important;
+}
+
+/* Black text -> premium readable dark blue/gray */
+.card *,
+.panel *,
+.form-card *,
+.table-card *{
+    color:inherit;
+}
+
+/* Blue sections always white text */
+.hero,
+.premium-hero,
+.premium-nav,
+.navbar,
+.blue-section,
+[class*="blue-bg"]{
+    color:#ffffff !important;
+}
+
+.hero *,
+.premium-hero *,
+.premium-nav *,
+.navbar *,
+.blue-section *,
+[class*="blue-bg"] *{
+    color:#ffffff !important;
+}
+
+/* Marksheets */
+.marksheet-page,
+.marksheet-page .card{
+    background:#ffffff !important;
+    color:#334155 !important;
+}
+
+.marksheet-page h1,
+.marksheet-page h2,
+.marksheet-page h3{
+    color:#174ea6 !important;
+}
+
+.marksheet-page th{
+    background:linear-gradient(135deg,#2563eb,#174ea6) !important;
+    color:#ffffff !important;
+}
+
+.marksheet-page td{
+    color:#334155 !important;
+    border-color:#dbe7f5 !important;
+}
+
+/* Never use pure black as UI color */
+[style*="#000"],
+[style*="#111111"],
+[style*="#111827"],
+[style*="#090909"]{
+    color:#334155 !important;
+    background-color:#ffffff !important;
+    border-color:#dbe7f5 !important;
+}
+
+
+/* =========================================
+   BYAPON FINAL PREMIUM UI
+   BLUE BACKGROUND = WHITE TEXT
+   PREMIUM TYPOGRAPHY
+   ========================================= */
+
+/* PREMIUM FONTS */
+body,
+button,
+input,
+select,
+textarea,
+table {
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: .01em;
+}
+
+h1,h2,h3,h4,h5,h6,
+.page-title,
+.hero-title,
+.dashboard-title,
+.section-title,
+.card-title {
+    font-family: 'Space Grotesk','Inter',sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -.025em !important;
+}
+
+h1,
+.hero-title,
+.dashboard-title {
+    font-weight: 800 !important;
+    letter-spacing: -.035em !important;
+}
+
+/* BLUE AREAS = WHITE TYPOGRAPHY */
+.premium-hero,
+.admin-hero,
+.teacher-hero,
+.student-hero,
+.dashboard-hero,
+.blue-section,
+.blue-bg,
+.hero,
+.banner {
+    color: #fff !important;
+}
+
+.premium-hero *,
+.admin-hero *,
+.teacher-hero *,
+.student-hero *,
+.dashboard-hero *,
+.blue-section *,
+.blue-bg *,
+.hero *,
+.banner * {
+    color: #fff !important;
+}
+
+/* GOLD ACCENTS STAY GOLD */
+.premium-hero .gold,
+.admin-hero .gold,
+.teacher-hero .gold,
+.student-hero .gold,
+.dashboard-hero .gold,
+.blue-section .gold,
+.blue-bg .gold {
+    color: #d4af37 !important;
+}
+
+/* PREMIUM BUTTON TEXT */
+button,
+.btn,
+.admin-edit-btn,
+.att-edit,
+.att-delete {
+    font-family: 'Inter',sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: .025em !important;
+}
+
+/* TABLE HEADINGS */
+table th {
+    font-family: 'Inter',sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: .02em !important;
+}
+

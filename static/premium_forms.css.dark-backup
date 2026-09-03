@@ -1,0 +1,426 @@
+/* ============================================================
+   BYAPON CMS — BLACK × GOLD PREMIUM V2
+   ============================================================ */
+
+:root{
+    --black:#050505;
+    --black-2:#0b0b0b;
+    --black-3:#111111;
+    --gold:#ffd84a;
+    --gold-bright:#ffe98a;
+    --gold-dark:#b8860b;
+    --white:#ffffff;
+    --text:#f7f7f7;
+    --muted:#c8c8c8;
+    --border:#292929;
+    --danger:#ff4d5e;
+    --blue:#3d8bff;
+}
+
+/* ---------- GLOBAL BRIGHTNESS ---------- */
+
+body{
+    background:
+        radial-gradient(circle at 10% 0%,rgba(255,216,74,.10),transparent 25%),
+        radial-gradient(circle at 90% 10%,rgba(255,216,74,.07),transparent 25%),
+        #050505 !important;
+    color:var(--text) !important;
+}
+
+/* ---------- FORM CARD ---------- */
+
+form{
+    position:relative;
+    background:
+        linear-gradient(145deg,#111111 0%,#070707 55%,#101010 100%) !important;
+    border:1px solid #343434 !important;
+    border-radius:22px !important;
+    padding:30px !important;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.65),
+        0 0 0 1px rgba(255,216,74,.04) inset !important;
+    overflow:hidden;
+    margin-bottom:28px;
+}
+
+form::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:4px;
+    background:
+        linear-gradient(
+            90deg,
+            #8a6500,
+            #ffd84a,
+            #fff2a8,
+            #ffd84a,
+            #8a6500
+        );
+}
+
+/* subtle gold glow */
+form::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    right:-100px;
+    top:-100px;
+    border-radius:50%;
+    background:rgba(255,216,74,.07);
+    pointer-events:none;
+}
+
+/* ---------- HEADINGS ---------- */
+
+form h1,
+form h2,
+form h3{
+    color:var(--gold-bright) !important;
+    font-weight:900 !important;
+    letter-spacing:.2px;
+    text-shadow:
+        0 0 12px rgba(255,216,74,.20);
+}
+
+form h1::after,
+form h2::after,
+form h3::after{
+    content:"";
+    display:block;
+    width:58px;
+    height:4px;
+    margin-top:9px;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-bright));
+    box-shadow:0 0 12px rgba(255,216,74,.35);
+}
+
+/* ---------- LABELS: ALWAYS CLEAR ---------- */
+
+form label{
+    display:block !important;
+    color:#ffe98a !important;
+    font-size:14px !important;
+    line-height:1.5 !important;
+    font-weight:900 !important;
+    margin:18px 0 8px !important;
+    letter-spacing:.15px;
+    text-shadow:0 0 8px rgba(255,216,74,.12);
+}
+
+/* ---------- INPUTS ---------- */
+
+form input:not([type="checkbox"]):not([type="radio"]),
+form select,
+form textarea{
+    width:100% !important;
+    box-sizing:border-box !important;
+    min-height:50px !important;
+
+    background:#151515 !important;
+    color:#ffffff !important;
+
+    border:1px solid #3a3a3a !important;
+    border-radius:13px !important;
+
+    padding:13px 15px !important;
+
+    font-size:15px !important;
+    font-weight:650 !important;
+    line-height:1.45 !important;
+
+    outline:none !important;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+form textarea{
+    min-height:115px !important;
+}
+
+form input::placeholder,
+form textarea::placeholder{
+    color:#8e8e8e !important;
+    opacity:1 !important;
+}
+
+form input:not([type="checkbox"]):not([type="radio"]):focus,
+form select:focus,
+form textarea:focus{
+    background:#191919 !important;
+    border-color:var(--gold) !important;
+    box-shadow:
+        0 0 0 3px rgba(255,216,74,.10),
+        0 0 22px rgba(255,216,74,.10) !important;
+    transform:translateY(-1px);
+}
+
+/* ---------- SELECT ---------- */
+
+form select{
+    color:#fff !important;
+}
+
+form select option{
+    background:#111 !important;
+    color:#fff !important;
+}
+
+/* ---------- CHECKBOX / RADIO ---------- */
+
+form input[type="checkbox"],
+form input[type="radio"]{
+    width:18px !important;
+    height:18px !important;
+    min-height:18px !important;
+    accent-color:var(--gold);
+}
+
+/* ---------- BUTTON BASE ---------- */
+
+form button,
+form input[type="submit"],
+form input[type="button"]{
+    min-height:48px !important;
+    border:0 !important;
+    border-radius:13px !important;
+
+    padding:12px 24px !important;
+
+    font-size:14px !important;
+    font-weight:950 !important;
+    letter-spacing:.25px;
+
+    cursor:pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        filter .18s ease;
+
+    margin:18px 6px 0 0 !important;
+}
+
+/* PRIMARY SAVE / ADD / UPDATE */
+
+form button[type="submit"],
+form input[type="submit"]{
+    background:
+        linear-gradient(
+            135deg,
+            #b8860b 0%,
+            #ffd84a 42%,
+            #fff0a0 52%,
+            #ffd84a 65%,
+            #b8860b 100%
+        ) !important;
+
+    color:#090909 !important;
+
+    box-shadow:
+        0 8px 24px rgba(255,216,74,.20),
+        0 0 0 1px rgba(255,255,255,.10) inset !important;
+
+    text-shadow:none !important;
+}
+
+form button[type="submit"]:hover,
+form input[type="submit"]:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+    box-shadow:
+        0 13px 32px rgba(255,216,74,.28),
+        0 0 18px rgba(255,216,74,.14) !important;
+}
+
+/* ---------- LINKS / CANCEL / EDIT ---------- */
+
+form a{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+
+    min-height:44px;
+    box-sizing:border-box;
+
+    padding:10px 18px !important;
+
+    border-radius:12px !important;
+
+    background:#171717 !important;
+    color:var(--gold-bright) !important;
+
+    border:1px solid #5c4810 !important;
+
+    font-weight:900 !important;
+    text-decoration:none !important;
+
+    transition:.18s ease;
+}
+
+form a:hover{
+    background:#211c0c !important;
+    border-color:var(--gold) !important;
+    color:#fff1a8 !important;
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(255,216,74,.10);
+}
+
+/* ---------- COMMON ACTION BUTTONS OUTSIDE FORMS ---------- */
+
+button,
+.btn,
+a.btn,
+.action-btn{
+    border-radius:11px !important;
+    font-weight:900 !important;
+    transition:.18s ease;
+}
+
+/* Edit */
+.btn-edit,
+.edit-btn,
+a[href*="edit"],
+a[href*="update"]{
+    background:#171717 !important;
+    color:#ffe98a !important;
+    border:1px solid #9a7410 !important;
+    box-shadow:0 4px 14px rgba(255,216,74,.08);
+}
+
+/* Delete */
+.btn-delete,
+.delete-btn,
+a[href*="delete"]{
+    background:#210b0e !important;
+    color:#ff7180 !important;
+    border:1px solid #7d2630 !important;
+}
+
+/* ---------- TABLES ---------- */
+
+table{
+    width:100%;
+    background:#0b0b0b !important;
+    color:#fff !important;
+    border:1px solid #292929 !important;
+    border-radius:16px;
+    overflow:hidden;
+}
+
+th{
+    background:
+        linear-gradient(135deg,#171717,#050505) !important;
+    color:#ffe98a !important;
+    border-bottom:2px solid #72560c !important;
+    font-weight:900 !important;
+}
+
+td{
+    color:#f4f4f4 !important;
+    border-bottom:1px solid #242424 !important;
+}
+
+tr:nth-child(even){
+    background:#101010 !important;
+}
+
+tr:hover{
+    background:#17130a !important;
+}
+
+/* ---------- PAGE / SECTION TITLES ---------- */
+
+.page-title,
+.section-title,
+h1,
+h2{
+    color:#ffe98a !important;
+}
+
+/* ---------- CARDS ---------- */
+
+.card,
+.form-card,
+.admin-card{
+    background:#0b0b0b !important;
+    color:#fff !important;
+    border:1px solid #292929 !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.55) !important;
+}
+
+/* ---------- FORM ROW ---------- */
+
+.form-row{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+}
+
+.form-group{
+    min-width:0;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:700px){
+
+    form{
+        padding:22px 16px !important;
+        border-radius:18px !important;
+        margin:10px 4px 20px !important;
+    }
+
+    form label{
+        font-size:14px !important;
+        margin-top:15px !important;
+    }
+
+    form input:not([type="checkbox"]):not([type="radio"]),
+    form select,
+    form textarea{
+        font-size:16px !important;
+        min-height:51px !important;
+    }
+
+    .form-row{
+        grid-template-columns:1fr !important;
+        gap:4px !important;
+    }
+
+    form button,
+    form input[type="submit"],
+    form input[type="button"]{
+        width:100% !important;
+        margin-right:0 !important;
+    }
+
+    form a{
+        width:100% !important;
+        margin-top:9px !important;
+    }
+}
+
+/* ---------- PRINT ---------- */
+
+@media print{
+
+    body{
+        background:#fff !important;
+        color:#000 !important;
+    }
+
+    form{
+        background:#fff !important;
+        color:#000 !important;
+        box-shadow:none !important;
+    }
+}

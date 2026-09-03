@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="exam-page">
+
+    <div class="exam-hero">
+        <div>
+            <div class="exam-kicker">ACADEMIC MANAGEMENT</div>
+            <h1>Exams & Marks</h1>
+            <p>Create exams, enter marks and manage academic results.</p>
+        </div>
+    </div>
+
+    {% if session.get("role") == "admin" %}
+    <div class="card exam-create-card">
+        <h2>Create New Exam</h2>
+
+        <form method="post" class="exam-form">
+
+            <input name="title"
+                   placeholder="Exam Title"
+                   required>
+
+            <input name="subject"
+                   placeholder="Subject">
+
+            <input type="date"
+                   name="exam_date">
+
+            <input name="full_marks"
+                   type="number"
+                   value="100"
+                   placeholder="Full Marks">
+
+            <input name="pass_marks"
+                   type="number"
+                   value="33"
+                   placeholder="Pass Marks">
+
+            <button class="btn primary exam-create-btn">
+                CREATE EXAM
+            </button>
+
+        </form>
+    </div>
+    {% endif %}
+
+    <div class="card tablewrap exam-table-card">
+
+        <div class="exam-table-title">
+            <h2>Exam List</h2>
+            {% if session.get("role") == "teacher" %}
+            <span class="teacher-badge">TEACHER ACCESS</span>
+            {% endif %}
+        </div>
+
+        <table class="exam-table">
+
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for e in exams %}
+                <tr>
+
+                    <td data-label="Title">
+                        <strong>{{ e.title }}</strong>
+                    </td>
+
+                    <td data-label="Subject">
+                        {{ e.subject or "—" }}
+                    </td>
+
+                    <td data-label="Date">
+                        {{ e.exam_date or "—" }}
+                    </td>
+
+                    <td data-label="Action">
+                        <div class="exam-actions">
+
+                            <a class="exam-mark-btn"
+                               href="{{ url_for('marks', eid=e.id) }}">
+                                ENTER MARKS
+                            </a>
+
+                            {% if session.get("role") == "admin" %}
+
+                            <a class="exam-edit-btn"
+                               href="{{ url_for('edit_exam', eid=e.id) }}">
+                                EDIT
+                            </a>
+
+                            <form method="post"
+                                  action="{{ url_for('delete_exam', eid=e.id) }}"
+                                  onsubmit="return confirm('Delete this exam and its marks?');">
+                                <button type="submit"
+                                        class="exam-delete-btn">
+                                    DELETE
+                                </button>
+                            </form>
+
+                            {% endif %}
+
+                        </div>
+                    </td>
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="empty-exams">
+                        No exams created yet.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+<style>
+.exam-page{
+    max-width:1200px;
+    margin:auto;
+}
+
+.exam-hero{
+    background:linear-gradient(135deg,#2563eb,#174ea6);
+    color:#fff !important;
+    border-radius:22px;
+    padding:26px;
+    margin-bottom:20px;
+    box-shadow:0 12px 30px rgba(37,99,235,.16);
+}
+
+.exam-hero h1,
+.exam-hero p,
+.exam-kicker{
+    color:#fff !important;
+}
+
+.exam-kicker{
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:2px;
+    opacity:.9;
+}
+
+.exam-hero h1{
+    margin:6px 0;
+}
+
+.exam-hero p{
+    margin:0;
+    opacity:.92;
+}
+
+.exam-create-card{
+    margin-bottom:20px;
+}
+
+.exam-create-card h2,
+.exam-table-title h2{
+    color:#174ea6;
+}
+
+.exam-form{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+
+.exam-form input{
+    min-width:0;
+}
+
+.exam-create-btn{
+    min-height:46px;
+    color:#fff !important;
+}
+
+.exam-table-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.teacher-badge{
+    background:#fff4cf;
+    color:#8a6500;
+    border:1px solid #e7c85b;
+    padding:7px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:900;
+}
+
+.exam-actions{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.exam-actions form{
+    margin:0;
+}
+
+.exam-mark-btn,
+.exam-edit-btn,
+.exam-delete-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:8px 12px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:11px;
+    font-weight:900;
+    border:1px solid transparent;
+    cursor:pointer;
+}
+
+.exam-mark-btn{
+    background:#2563eb;
+    color:#fff !important;
+}
+
+.exam-edit-btn{
+    background:#fff8df;
+    color:#8a6500 !important;
+    border-color:#e7c85b;
+}
+
+.exam-delete-btn{
+    background:#fff1f1;
+    color:#b42318;
+    border-color:#efb4b0;
+}
+
+.empty-exams{
+    text-align:center;
+    padding:30px !important;
+    color:#64748b;
+}
+
+@media(max-width:800px){
+    .exam-form{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .exam-create-btn{
+        grid-column:1/-1;
+    }
+}
+
+@media(max-width:650px){
+
+    .exam-hero{
+        padding:20px;
+        border-radius:18px;
+    }
+
+    .exam-table-card{
+        padding:12px !important;
+    }
+
+    .exam-table,
+    .exam-table tbody{
+        display:block;
+        width:100%;
+        min-width:0 !important;
+    }
+
+    .exam-table thead{
+        display:none;
+    }
+
+    .exam-table tr{
+        display:block;
+        background:#fff;
+        border:1px solid #dbe7f5;
+        border-radius:16px;
+        margin-bottom:12px;
+        padding:10px;
+    }
+
+    .exam-table td{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        border:0 !important;
+        padding:9px 4px !important;
+        min-width:0 !important;
+    }
+
+    .exam-table td::before{
+        content:attr(data-label);
+        font-weight:900;
+        color:#64748b;
+        flex:0 0 auto;
+    }
+
+    .exam-table td:last-child{
+        display:block;
+        border-top:1px solid #edf2f7 !important;
+        margin-top:5px;
+        padding-top:12px !important;
+    }
+
+    .exam-table td:last-child::before{
+        display:block;
+        margin-bottom:8px;
+    }
+
+    .exam-actions{
+        width:100%;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .exam-mark-btn{
+        grid-column:1/-1;
+    }
+
+    .exam-actions form{
+        width:100%;
+    }
+
+    .exam-delete-btn,
+    .exam-edit-btn{
+        width:100%;
+    }
+
+    .exam-form{
+        grid-template-columns:1fr;
+    }
+
+    .exam-create-btn{
+        grid-column:auto;
+    }
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,377 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+body{
+    background:#f7faff!important;
+    color:#10213f;
+}
+.home{
+    max-width:1180px;
+    margin:auto;
+    padding:15px;
+}
+.hero{
+    position:relative;
+    overflow:hidden;
+    padding:65px 50px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ffffff,#eef5ff);
+    border:1px solid #dce8f8;
+    box-shadow:0 20px 55px rgba(21,94,239,.12);
+}
+.hero:after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    right:-110px;
+    top:-120px;
+    border-radius:50%;
+    background:#ffd329;
+    opacity:.18;
+}
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:720px;
+}
+.badge{
+    display:inline-block;
+    padding:9px 16px;
+    border-radius:30px;
+    background:#fff4c7;
+    border:1px solid #ffe18a;
+    color:#805d00;
+    font-size:12px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+}
+h1{
+    font-size:clamp(40px,7vw,70px);
+    line-height:1.02;
+    margin:20px 0 12px;
+    font-weight:900;
+    letter-spacing:-2px;
+    color:#10213f;
+}
+h1 span{
+    display:inline-block;
+    color:#155eef;
+    background:linear-gradient(
+        90deg,
+        #0b3b91 0%,
+        #155eef 35%,
+        #ffd329 50%,
+        #155eef 65%,
+        #0b3b91 100%
+    );
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:byaponShine 3s linear infinite,
+              byaponFloat 2.8s ease-in-out infinite;
+    transform-origin:center;
+}
+
+@keyframes byaponShine{
+    0%{
+        background-position:250% center;
+    }
+    100%{
+        background-position:-250% center;
+    }
+}
+
+@keyframes byaponFloat{
+    0%,100%{
+        transform:translateY(0) scale(1);
+    }
+    50%{
+        transform:translateY(-5px) scale(1.015);
+    }
+}
+.hero p{
+    max-width:650px;
+    color:#64748b;
+    font-size:17px;
+    line-height:1.8;
+}
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+}
+.btn{
+    display:inline-block;
+    text-decoration:none!important;
+    padding:14px 24px;
+    border-radius:13px;
+    font-weight:800;
+}
+.primary{
+    background:linear-gradient(135deg,#155eef,#0b3b91);
+    color:#fff!important;
+    box-shadow:0 10px 25px rgba(21,94,239,.25);
+}
+.secondary{
+    background:#fff;
+    color:#10213f!important;
+    border:1px solid #dbe5f3;
+}
+.section{
+    margin-top:55px;
+}
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+.title h2{
+    margin:0 0 8px;
+    font-size:31px;
+    font-weight:900;
+}
+.title p{
+    color:#64748b;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.card{
+    background:#fff;
+    border:1px solid #e2eaf5;
+    border-radius:20px;
+    padding:26px;
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+    transition:.25s;
+}
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 38px rgba(21,94,239,.12);
+}
+.icon{
+    width:50px;
+    height:50px;
+    border-radius:15px;
+    background:#eaf2ff;
+    color:#155eef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    font-weight:900;
+}
+.card h3{
+    margin:17px 0 8px;
+    font-size:19px;
+}
+.card p{
+    color:#64748b;
+    line-height:1.65;
+    font-size:14px;
+}
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+.feature{
+    background:#fff;
+    border:1px solid #e2eaf5;
+    border-radius:18px;
+    padding:22px 14px;
+    text-align:center;
+}
+.feature strong{
+    display:block;
+    margin-top:10px;
+    font-size:15px;
+}
+.feature small{
+    display:block;
+    color:#64748b;
+    margin-top:6px;
+    line-height:1.5;
+}
+.cta{
+    margin-top:55px;
+    padding:42px 25px;
+    border-radius:26px;
+    text-align:center;
+    background:linear-gradient(135deg,#0b3b91,#155eef);
+    color:white;
+    box-shadow:0 18px 45px rgba(21,94,239,.2);
+}
+.cta h2{
+    margin:0 0 10px;
+    font-size:30px;
+    font-weight:900;
+}
+.cta p{
+    opacity:.9;
+    line-height:1.7;
+}
+.login{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+}
+.login a{
+    background:#fff;
+    color:#0b3b91!important;
+    padding:12px 20px;
+    border-radius:11px;
+    text-decoration:none!important;
+    font-weight:800;
+}
+.footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:12px;
+    margin:28px 0 10px;
+}
+@media(max-width:850px){
+    .hero{padding:45px 28px}
+    .cards{grid-template-columns:1fr 1fr}
+    .features{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+    .home{padding:10px}
+    .hero{padding:38px 22px;border-radius:22px}
+    h1{font-size:43px}
+    .hero p{font-size:15px}
+    .buttons{flex-direction:column}
+    .btn{text-align:center;width:100%}
+    .cards{grid-template-columns:1fr}
+    .features{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<div class="home">
+
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="badge">Excellence • Discipline • Success</div>
+
+            <h1>
+                BYAPON<br>
+                <span>Coaching Center</span>
+            </h1>
+
+            <p>
+                A focused learning environment where students receive
+                quality academic guidance, regular practice and the
+                confidence they need to achieve better results.
+            </p>
+
+            <div class="buttons">
+                <a href="/login" class="btn primary">Student Login</a>
+                <a href="#programs" class="btn secondary">Our Programs</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="programs">
+
+        <div class="title">
+            <h2>Our Academic Programs</h2>
+            <p>Focused learning for stronger academic performance.</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">M</div>
+                <h3>Mathematics</h3>
+                <p>
+                    Build strong concepts through clear explanations,
+                    problem solving and regular practice.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">E</div>
+                <h3>English</h3>
+                <p>
+                    Improve grammar, vocabulary, writing and
+                    communication skills with structured guidance.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">S</div>
+                <h3>Science</h3>
+                <p>
+                    Understand important concepts through organized
+                    lessons and effective academic support.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+
+        <div class="title">
+            <h2>Why Students Choose BYAPON</h2>
+            <p>A supportive environment built around learning and progress.</p>
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="icon" style="margin:auto">01</div>
+                <strong>Quality Guidance</strong>
+                <small>Clear and focused academic support.</small>
+            </div>
+
+            <div class="feature">
+                <div class="icon" style="margin:auto">02</div>
+                <strong>Regular Practice</strong>
+                <small>Consistent practice for better performance.</small>
+            </div>
+
+            <div class="feature">
+                <div class="icon" style="margin:auto">03</div>
+                <strong>Progress Focus</strong>
+                <small>Helping students move toward their goals.</small>
+            </div>
+
+            <div class="feature">
+                <div class="icon" style="margin:auto">04</div>
+                <strong>Student First</strong>
+                <small>A positive environment for every learner.</small>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Build Your Future With BYAPON</h2>
+        <p>
+            Learn with confidence. Practice with purpose. Achieve with consistency.
+        </p>
+
+        <div class="login">
+            <a href="/login">Student Login</a>
+            <a href="/login">Teacher Login</a>
+            <a href="/login">Admin Login</a>
+        </div>
+    </section>
+
+    <div class="footer">
+        © BYAPON Coaching Center • Learn. Improve. Succeed.
+    </div>
+
+</div>
+
+{% endblock %}

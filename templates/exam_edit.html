@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Edit Exam</h1>
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<input
+name="title"
+value="{{exam.title}}"
+required
+>
+
+<input
+name="subject"
+value="{{exam.subject or ''}}"
+>
+
+<input
+type="date"
+name="exam_date"
+value="{{exam.exam_date or ''}}"
+>
+
+<input
+name="full_marks"
+type="number"
+value="{{exam.full_marks}}"
+>
+
+<input
+name="pass_marks"
+type="number"
+value="{{exam.pass_marks}}"
+>
+
+<button class="btn primary">
+SAVE EXAM
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

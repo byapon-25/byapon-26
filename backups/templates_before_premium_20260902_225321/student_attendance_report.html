@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.marksheet-page{
+    max-width:1000px;
+    margin:30px auto;
+    padding:20px;
+}
+.marksheet-card{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 12px 40px rgba(15,23,42,.12);
+    border:1px solid #e5e7eb;
+}
+.marksheet-header{
+    background:linear-gradient(135deg,#0f3d91,#2563eb);
+    color:#fff;
+    padding:30px;
+    position:relative;
+}
+.marksheet-header:after{
+    content:"";
+    position:absolute;
+    right:-45px;
+    top:-70px;
+    width:190px;
+    height:190px;
+    background:#facc15;
+    border-radius:50%;
+    opacity:.18;
+}
+.brand{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+.marksheet-title{
+    margin-top:8px;
+    font-size:22px;
+    font-weight:700;
+}
+.student-info{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    padding:25px 30px;
+}
+.info-box{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:15px 18px;
+}
+.info-label{
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+.info-value{
+    color:#0f172a;
+    font-size:17px;
+    font-weight:700;
+    margin-top:4px;
+}
+.table-wrap{
+    padding:0 30px 30px;
+    overflow-x:auto;
+}
+.marks-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+.marks-table th{
+    background:#0f3d91;
+    color:#fff;
+    padding:15px;
+    text-align:left;
+    font-size:13px;
+}
+.marks-table td{
+    padding:14px 15px;
+    border-bottom:1px solid #e5e7eb;
+    color:#334155;
+}
+.marks-table tr:nth-child(even) td{
+    background:#f8fafc;
+}
+.mark-value{
+    font-size:18px;
+    font-weight:800;
+    color:#0f3d91;
+}
+.actions{
+    text-align:center;
+    padding:0 30px 30px;
+}
+.print-btn{
+    border:0;
+    background:#facc15;
+    color:#111827;
+    padding:13px 25px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+    font-size:14px;
+}
+.print-btn:hover{
+    background:#eab308;
+}
+@media(max-width:700px){
+    .marksheet-page{margin:10px auto;padding:8px}
+    .marksheet-header{padding:22px}
+    .brand{font-size:23px}
+    .marksheet-title{font-size:18px}
+    .student-info{grid-template-columns:1fr;padding:18px 20px}
+    .table-wrap{padding:0 20px 20px}
+    .actions{padding:0 20px 20px}
+}
+@media print{
+    body{background:#fff!important}
+    .marksheet-page{margin:0;padding:0;max-width:none}
+    .marksheet-card{
+        box-shadow:none;
+        border:0;
+        border-radius:0;
+    }
+    .actions{display:none!important}
+    .marksheet-header,
+    .marks-table th{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+}
+</style>
+
+<div class="marksheet-page">
+<div class="marksheet-card">
+
+    <div class="marksheet-header">
+        <div class="brand">BYAPON Coaching Center</div>
+        <div class="marksheet-title">Attendance Report</div>
+    </div>
+
+    <div class="student-info">
+        <div class="info-box">
+            <div class="info-label">Student Name</div>
+            <div class="info-value">{{ student.name }}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Student ID</div>
+            <div class="info-value">{{ student.student_id }}</div>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table class="marks-table">
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+
+            {% for a in attendance %}
+            <tr>
+                <td>{{ a['attendance_date'] }}</td>
+                <td class="mark-value">{{ a['status'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="actions">
+        <button class="print-btn" onclick="window.print()">PRINT / SAVE PDF</button>
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

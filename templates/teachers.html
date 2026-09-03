@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Teachers</h1>
+
+<div class="card">
+
+<form method="get" class="search">
+
+<input
+name="q"
+value="{{q}}"
+placeholder="Search teacher..."
+>
+
+<button class="btn">
+SEARCH
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<input
+name="name"
+placeholder="Teacher Name"
+required
+>
+
+<input
+name="username"
+placeholder="Login Username"
+>
+
+<input
+name="password"
+placeholder="Password"
+>
+
+<input
+name="phone"
+placeholder="Phone"
+>
+
+<input
+name="subject"
+placeholder="Subject"
+>
+
+<input
+name="salary"
+type="number"
+placeholder="Salary"
+>
+
+<button class="btn primary">
+ADD TEACHER
+</button>
+
+</form>
+
+</div>
+
+<div class="card tablewrap">
+
+<table>
+
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>Subject</th>
+<th>Salary</th>
+<th>Action</th>
+</tr>
+
+{% for t in teachers %}
+
+<tr>
+
+<td>{{t.name}}</td>
+<td>{{t.phone}}</td>
+<td>{{t.subject}}</td>
+<td>৳{{t.salary}}</td>
+
+<td class="actions">
+
+<a
+class="btn small"
+href="/teachers/{{t.id}}/edit"
+>
+Edit
+</a>
+
+<form
+method="post"
+action="/teachers/{{t.id}}/delete"
+>
+
+<button class="danger">
+Delete
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% block title %}Marksheet • BYAPON{% endblock %}
+
+{% block content %}
+
+<section class="report-page">
+
+    <div class="print-actions">
+        <button type="button" class="btn btn-primary" onclick="window.print()">
+            🖨 Print Marksheet
+        </button>
+
+        <a href="/student-dashboard" class="btn">
+            ← Dashboard
+        </a>
+    </div>
+
+    <div class="report-paper">
+
+        <div class="report-head">
+            <h1>BYAPON COACHING CENTER</h1>
+            <p>STUDENT ACADEMIC MARKSHEET</p>
+        </div>
+
+        <div class="student-info">
+            <p><b>Student Name:</b> {{ student.name }}</p>
+            <p><b>Student ID:</b> {{ student.student_id }}</p>
+            <p><b>Class:</b> {{ student.class_name }}</p>
+            <p><b>Batch:</b> {{ student.batch }}</p>
+        </div>
+
+        <br>
+
+        <table class="report-table marksheet-table">
+
+            <thead>
+                <tr>
+                    <th>Exam</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Full Marks</th>
+                    <th>Marks</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for r in results %}
+
+                <tr>
+                    <td>{{ r.title }}</td>
+
+                    <td>
+                        {{ r.subject }}
+                    </td>
+
+                    <td>
+                        {{ r.exam_date }}
+                    </td>
+
+                    <td>
+                        {{ r.full_marks }}
+                    </td>
+
+                    <td>
+                        {{ r.marks }}
+                    </td>
+
+                    <td>
+                        {% if r.marks >= r.pass_marks %}
+                            <strong class="pass-text">PASS</strong>
+                        {% else %}
+                            <strong class="fail-text">FAIL</strong>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% else %}
+
+                <tr>
+                    <td colspan="6">
+                        No examination records found.
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="report-signature">
+            <div>____________________<br>Teacher Signature</div>
+            <div>____________________<br>Authority Signature</div>
+        </div>
+
+    </div>
+
+</section>
+
+<style>
+
+.report-page{
+    padding:35px 0 70px;
+}
+
+.print-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.report-paper{
+    background:#ffffff;
+    color:#334155;
+    max-width:950px;
+    margin:auto;
+    padding:40px;
+    border-radius:18px;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.report-head{
+    text-align:center;
+    border-bottom:3px solid #174ea6;
+    padding-bottom:18px;
+    margin-bottom:25px;
+}
+
+.report-head h1{
+    font-size:28px;
+    margin:0;
+}
+
+.report-head p{
+    font-size:12px;
+    letter-spacing:2px;
+    margin-top:5px;
+}
+
+.student-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 30px;
+    font-size:13px;
+}
+
+.report-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.report-table th,
+.report-table td{
+    border:1px solid #999;
+    padding:11px 9px;
+    text-align:center;
+    color:#334155;
+    font-size:12px;
+}
+
+.report-table th{
+    background:#eeeeee;
+    font-weight:800;
+}
+
+.pass-text{
+    color:#087f3f;
+}
+
+.fail-text{
+    color:#c62828;
+}
+
+.report-signature{
+    display:flex;
+    justify-content:space-between;
+    margin-top:70px;
+    text-align:center;
+    font-size:11px;
+}
+
+@media(max-width:600px){
+
+    .report-paper{
+        padding:18px;
+        border-radius:12px;
+    }
+
+    .report-head h1{
+        font-size:20px;
+    }
+
+    .student-info{
+        grid-template-columns:1fr;
+    }
+
+    .report-table{
+        min-width:700px;
+    }
+
+    .report-paper{
+        overflow-x:auto;
+    }
+}
+
+@media print{
+
+    body{
+        background:#ffffff !important;
+        color:#334155 !important;
+    }
+
+    .premium-nav,
+    .premium-footer,
+    .bg-glow,
+    .print-actions{
+        display:none !important;
+    }
+
+    .page-shell{
+        width:100% !important;
+        min-height:0 !important;
+    }
+
+    .report-page{
+        padding:0 !important;
+    }
+
+    .report-paper{
+        max-width:none !important;
+        width:100% !important;
+        margin:0 !important;
+        padding:20px !important;
+        border-radius:0 !important;
+        box-shadow:none !important;
+        overflow:visible !important;
+    }
+
+    .report-table{
+        min-width:0 !important;
+    }
+
+    .report-table th,
+    .report-table td{
+        color:#334155 !important;
+        border:1px solid #555 !important;
+    }
+
+}
+
+</style>
+
+{% endblock %}

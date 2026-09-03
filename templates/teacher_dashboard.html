@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+{% block title %}Teacher Portal • BYAPON{% endblock %}
+
+{% block content %}
+
+<style>
+.teacher-page{
+    max-width:1200px;
+    margin:auto;
+}
+
+.teacher-hero{
+    background:linear-gradient(135deg,#ffffff 0%,#f3f8ff 100%) !important;
+    border:1px solid #d9e7f7 !important;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(37,99,235,.08);
+    margin-bottom:20px;
+}
+
+.teacher-hero small{
+    color:#c79516 !important;
+    font-weight:900;
+    letter-spacing:1.5px;
+}
+
+.teacher-hero h1{
+    margin:7px 0;
+    color:#1756a9 !important;
+    font-size:32px;
+    font-weight:900;
+}
+
+.teacher-hero p{
+    color:#64748b !important;
+    margin:0;
+}
+
+.teacher-profile{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.teacher-info{
+    background:#ffffff !important;
+    border:1px solid #dce7f5 !important;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 7px 22px rgba(30,64,175,.06);
+}
+
+.teacher-info span{
+    display:block;
+    color:#94a3b8 !important;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+
+.teacher-info strong{
+    color:#174ea6 !important;
+    font-size:20px;
+}
+
+.teacher-info p{
+    color:#475569 !important;
+    margin:5px 0 0;
+}
+
+.teacher-section-title{
+    margin:24px 0 12px;
+}
+
+.teacher-section-title span{
+    color:#c79516 !important;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1.4px;
+}
+
+.teacher-section-title h2{
+    margin:5px 0 0;
+    color:#174ea6 !important;
+    font-weight:900;
+}
+
+.assignment-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:15px;
+}
+
+.assignment-card{
+    background:#ffffff !important;
+    border:1px solid #dce7f5 !important;
+    border-radius:18px;
+    padding:19px;
+    box-shadow:0 7px 22px rgba(30,64,175,.06);
+    position:relative;
+    overflow:hidden;
+}
+
+.assignment-card:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:4px;
+    background:linear-gradient(#2563eb,#d4a72c);
+}
+
+.assignment-card small{
+    color:#94a3b8 !important;
+    font-weight:900;
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+.assignment-card h3{
+    color:#174ea6 !important;
+    margin:8px 0;
+}
+
+.assignment-card p{
+    color:#475569 !important;
+    margin:5px 0;
+}
+
+.teacher-menu{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.teacher-menu-card{
+    display:block;
+    text-decoration:none !important;
+    background:#ffffff !important;
+    border:1px solid #dce7f5 !important;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 7px 22px rgba(30,64,175,.06);
+    transition:.2s;
+}
+
+.teacher-menu-card:hover{
+    transform:translateY(-3px);
+    border-color:#8fb5ee !important;
+}
+
+.teacher-menu-icon{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:#eef5ff !important;
+    color:#2563eb !important;
+    font-weight:900;
+    font-size:20px;
+}
+
+.teacher-menu-card h3{
+    color:#174ea6 !important;
+    margin:12px 0 6px;
+}
+
+.teacher-menu-card p{
+    color:#64748b !important;
+    margin:0 0 12px;
+}
+
+.teacher-menu-card span{
+    color:#c79516 !important;
+    font-weight:900;
+    font-size:12px;
+}
+
+@media(max-width:750px){
+    .teacher-hero{
+        padding:20px;
+        border-radius:18px;
+    }
+
+    .teacher-hero h1{
+        font-size:26px;
+    }
+
+    .teacher-profile{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+<div class="teacher-page">
+
+    <section class="teacher-hero">
+        <small>BYAPON COACHING CENTER • TEACHER PORTAL</small>
+        <h1>Welcome, {{ teacher.name if teacher else 'Teacher' }}</h1>
+        <p>Manage your assigned classes, attendance and academic responsibilities.</p>
+    </section>
+
+    <div class="teacher-profile">
+
+        <div class="teacher-info">
+            <span>TEACHER NAME</span>
+            <strong>{{ teacher.name if teacher else 'N/A' }}</strong>
+            <p>Teacher</p>
+        </div>
+
+        <div class="teacher-info">
+            <span>SUBJECT</span>
+            <strong>{{ teacher.subject if teacher and teacher.subject else 'Not Assigned' }}</strong>
+            <p>Teaching Subject</p>
+        </div>
+
+        <div class="teacher-info">
+            <span>PHONE</span>
+            <strong>{{ teacher.phone if teacher and teacher.phone else 'Not Available' }}</strong>
+            <p>Contact Information</p>
+        </div>
+
+    </div>
+
+    <div class="teacher-section-title">
+        <span>MY RESPONSIBILITIES</span>
+        <h2>Assigned Classes & Subjects</h2>
+    </div>
+
+    <div class="assignment-grid">
+
+        {% for a in assignments %}
+
+        <div class="assignment-card">
+            <small>ASSIGNED BATCH</small>
+            <h3>{{ a.batch }}</h3>
+            <p><strong>Subject:</strong> {{ a.subject }}</p>
+        </div>
+
+        {% else %}
+
+        <div class="assignment-card">
+            <small>ASSIGNMENTS</small>
+            <h3>No Assignment Yet</h3>
+            <p>Your assigned batches and subjects will appear here.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="teacher-section-title">
+        <span>TEACHER TOOLS</span>
+        <h2>Academic Management</h2>
+    </div>
+
+    <div class="teacher-menu">
+
+        <a class="teacher-menu-card" href="/attendance">
+            <div class="teacher-menu-icon">✓</div>
+            <h3>Attendance</h3>
+            <p>Take and manage student attendance.</p>
+            <span>OPEN →</span>
+        </a>
+
+        <a class="teacher-menu-card" href="/exams">
+            <div class="teacher-menu-icon">★</div>
+            <h3>Exams & Marks</h3>
+            <p>Enter and manage examination marks.</p>
+            <span>OPEN →</span>
+        </a>
+
+        <a class="teacher-menu-card" href="/routine">
+            <div class="teacher-menu-icon">◷</div>
+            <h3>Class Routine</h3>
+            <p>View the class schedule.</p>
+            <span>VIEW →</span>
+        </a>
+
+        <a class="teacher-menu-card" href="/notices">
+            <div class="teacher-menu-icon">!</div>
+            <h3>Notices</h3>
+            <p>Read coaching center notices.</p>
+            <span>VIEW →</span>
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

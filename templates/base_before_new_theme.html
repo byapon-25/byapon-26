@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{% block title %}BYAPON Coaching Center{% endblock %}</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='premium_forms.css') }}">
+</head>
+
+<body>
+
+<div class="bg-glow glow-one"></div>
+<div class="bg-glow glow-two"></div>
+
+<nav class="premium-nav">
+
+    <a href="/" class="logo">
+        <span class="logo-mark">B</span>
+        <span>
+            <strong>BYAPON</strong>
+            <small>COACHING CENTER</small>
+        </span>
+    </a>
+
+    <div class="nav-links">
+
+        {% if session.get("role") == "admin" %}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/students">Students</a>
+        <a href="/teachers">Teachers</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/exams">Exams</a>
+        <a href="/fees">Fees</a>
+        <a href="/finance">Finance</a>
+        <a href="/routine">Routine</a>
+        <a href="/assignments">Assignments</a>
+        <a href="/notices">Notices</a>
+
+        {% elif session.get("role") == "teacher" %}
+        <a href="/teacher-dashboard">Dashboard</a>
+        <a href="/attendance">Attendance</a>
+        <a href="/routine">Routine</a>
+        <a href="/notices">Notices</a>
+
+        {% elif session.get("role") == "student" %}
+        <a href="/student-dashboard">Dashboard</a>
+        <a href="/routine">Routine</a>
+        <a href="/notices">Notices</a>
+
+        {% endif %}
+
+        {% if session.get("user_id") %}
+        <a href="/logout" class="logout-link">Logout</a>
+        {% else %}
+        <a href="/login" class="nav-login">Login</a>
+        {% endif %}
+
+    </div>
+</nav>
+
+<main class="page-shell">
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash-stack">
+{% for category,message in messages %}
+<div class="flash {{ category }}">
+<span>{{ message }}</span>
+</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+</main>
+
+<footer class="premium-footer">
+    <div>
+        <strong>BYAPON</strong>
+        <span>COACHING CENTER</span>
+    </div>
+    <p>Smart Learning • Better Management • Stronger Results</p>
+</footer>
+
+</body>
+</html>

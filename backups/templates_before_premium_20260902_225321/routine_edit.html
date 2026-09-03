@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="premium-edit-page">
+<h2>Edit Routine</h2>
+<form method="POST">
+<label>Day</label><input type="text" name="day_name" value="{{ routine['day_name'] }}" required>
+<label>Batch</label><input type="text" name="batch" value="{{ routine['batch'] or '' }}">
+<label>Subject</label><input type="text" name="subject" value="{{ routine['subject'] or '' }}">
+<label>Teacher</label><input type="text" name="teacher" value="{{ routine['teacher'] or '' }}">
+<label>Start Time</label><input type="time" name="start_time" value="{{ routine['start_time'] or '' }}">
+<label>End Time</label><input type="time" name="end_time" value="{{ routine['end_time'] or '' }}">
+<button type="submit">SAVE CHANGES</button>
+<a href="/routine">CANCEL</a>
+</form>
+</div>
+{% endblock %}

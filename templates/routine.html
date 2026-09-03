@@ -1,0 +1,157 @@
+
+<style>
+.admin-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.admin-edit-btn,
+.admin-delete-btn{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+}
+.admin-edit-btn{
+    background:#d4a72c;
+    color:#fff !important;
+    border:1px solid #c29418;
+}
+.admin-edit-btn:hover{
+    background:#b8860b;
+}
+.admin-delete-btn{
+    background:#fff5f5;
+    color:#b42318;
+    border:1px solid #f0b7b2;
+}
+.admin-delete-btn:hover{
+    background:#ffe8e6;
+}
+.admin-delete-form{
+    display:inline;
+    margin:0;
+}
+</style>
+<script>
+function confirmDelete(name){
+    return confirm("Are you sure you want to delete " + name + "? This action cannot be undone.");
+}
+</script>
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Class Routine</h1>
+
+{% if session.get("role") == "admin" %}
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<input
+name="day_name"
+placeholder="Day"
+required
+>
+
+<input
+name="batch"
+placeholder="Batch"
+>
+
+<input
+name="subject"
+placeholder="Subject"
+>
+
+<input
+name="teacher"
+placeholder="Teacher"
+>
+
+<input
+name="start_time"
+placeholder="Start Time"
+>
+
+<input
+name="end_time"
+placeholder="End Time"
+>
+
+<button class="btn primary">
+ADD ROUTINE
+</button>
+
+</form>
+
+</div>
+
+{% endif %}
+
+<div class="card tablewrap">
+
+<table>
+
+<tr>
+<th>Day</th>
+<th>Batch</th>
+<th>Subject</th>
+<th>Teacher</th>
+<th>Time</th>
+
+{% if session.get("role")=="admin" %}
+<th>Action</th>
+{% endif %}
+
+</tr>
+
+{% for r in routines %}
+
+<tr>
+
+<td>{{r.day_name}}</td>
+<td>{{r.batch}}</td>
+<td>{{r.subject}}</td>
+<td>{{r.teacher}}</td>
+
+<td>
+{{r.start_time}} - {{r.end_time}}
+</td>
+
+{% if session.get("role")=="admin" %}
+
+<td>
+
+<a href="/routine/{{r.id}}/edit" class="admin-edit-btn">EDIT</a>
+
+<form
+method="post"
+action="/routine/{{r.id}}/delete"
+>
+
+<button class="danger">
+Delete
+</button>
+
+</form>
+
+</td>
+
+{% endif %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

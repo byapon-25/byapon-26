@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.report-page{
+    max-width:1000px;
+    margin:30px auto;
+    padding:20px;
+}
+.report-card{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 12px 40px rgba(15,23,42,.12);
+    border:1px solid #e5e7eb;
+}
+.report-header{
+    background:linear-gradient(135deg,#0f3d91,#2563eb);
+    color:#fff;
+    padding:30px;
+    position:relative;
+}
+.report-header:after{
+    content:"";
+    position:absolute;
+    right:-40px;
+    top:-60px;
+    width:180px;
+    height:180px;
+    background:#facc15;
+    border-radius:50%;
+    opacity:.18;
+}
+.brand{
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+.report-title{
+    margin:8px 0 0;
+    font-size:22px;
+    font-weight:700;
+}
+.student-info{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    padding:25px 30px 10px;
+}
+.info-box{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+    padding:15px 18px;
+}
+.info-label{
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+.info-value{
+    color:#0f172a;
+    font-size:17px;
+    font-weight:700;
+    margin-top:4px;
+}
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    padding:15px 30px 25px;
+}
+.stat{
+    padding:18px;
+    border-radius:15px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    text-align:center;
+}
+.stat strong{
+    display:block;
+    font-size:26px;
+    color:#0f3d91;
+}
+.stat span{
+    color:#64748b;
+    font-size:12px;
+    font-weight:700;
+}
+.table-wrap{
+    padding:0 30px 30px;
+    overflow-x:auto;
+}
+.report-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:500px;
+}
+.report-table th{
+    background:#0f3d91;
+    color:#fff;
+    padding:14px;
+    text-align:left;
+    font-size:13px;
+}
+.report-table td{
+    padding:13px 14px;
+    border-bottom:1px solid #e5e7eb;
+    color:#334155;
+}
+.report-table tr:nth-child(even) td{
+    background:#f8fafc;
+}
+.status{
+    font-weight:800;
+}
+.status-present{
+    color:#15803d;
+}
+.status-absent{
+    color:#dc2626;
+}
+.actions{
+    text-align:center;
+    padding:0 30px 30px;
+}
+.print-btn{
+    border:0;
+    background:#facc15;
+    color:#111827;
+    padding:13px 25px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+    font-size:14px;
+}
+.print-btn:hover{
+    background:#eab308;
+}
+
+@media(max-width:700px){
+    .report-page{margin:10px auto;padding:8px}
+    .report-header{padding:22px}
+    .brand{font-size:23px}
+    .report-title{font-size:18px}
+    .student-info{grid-template-columns:1fr;padding:18px 20px 5px}
+    .stats{grid-template-columns:repeat(2,1fr);padding:12px 20px 20px}
+    .table-wrap{padding:0 20px 20px}
+    .actions{padding:0 20px 20px}
+}
+
+@media print{
+    body{background:#fff!important}
+    .report-page{margin:0;padding:0;max-width:none}
+    .report-card{
+        box-shadow:none;
+        border:0;
+        border-radius:0;
+    }
+    .actions{display:none!important}
+    .report-header{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+    .report-table th{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+}
+</style>
+
+<div class="report-page">
+<div class="report-card">
+
+    <div class="report-header">
+        <div class="brand">BYAPON Coaching Center</div>
+        <div class="report-title">Attendance Report</div>
+    </div>
+
+    <div class="student-info">
+        <div class="info-box">
+            <div class="info-label">Student Name</div>
+            <div class="info-value">{{ student.name }}</div>
+        </div>
+        <div class="info-box">
+            <div class="info-label">Student ID</div>
+            <div class="info-value">{{ student.student_id }}</div>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <strong>{{ total }}</strong>
+            <span>TOTAL DAYS</span>
+        </div>
+        <div class="stat">
+            <strong>{{ present }}</strong>
+            <span>PRESENT</span>
+        </div>
+        <div class="stat">
+            <strong>{{ total - present }}</strong>
+            <span>ABSENT</span>
+        </div>
+        <div class="stat">
+            <strong>{{ percentage }}%</strong>
+            <span>ATTENDANCE</span>
+        </div>
+    </div>
+
+    <div class="table-wrap">
+        <table class="report-table">
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+
+            {% for a in attendance %}
+            <tr>
+                <td>{{ a['attendance_date'] }}</td>
+                <td class="status {% if a['status']|lower == 'present' %}status-present{% elif a['status']|lower == 'absent' %}status-absent{% endif %}">
+                    {{ a['status'] }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="actions">
+        <button class="print-btn" onclick="window.print()">PRINT / SAVE PDF</button>
+    </div>
+
+</div>
+</div>
+{% endblock %}

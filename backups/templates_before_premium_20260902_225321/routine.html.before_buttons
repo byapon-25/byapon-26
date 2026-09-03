@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Class Routine</h1>
+
+{% if session.get("role") == "admin" %}
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<input
+name="day_name"
+placeholder="Day"
+required
+>
+
+<input
+name="batch"
+placeholder="Batch"
+>
+
+<input
+name="subject"
+placeholder="Subject"
+>
+
+<input
+name="teacher"
+placeholder="Teacher"
+>
+
+<input
+name="start_time"
+placeholder="Start Time"
+>
+
+<input
+name="end_time"
+placeholder="End Time"
+>
+
+<button class="btn primary">
+ADD ROUTINE
+</button>
+
+</form>
+
+</div>
+
+{% endif %}
+
+<div class="card tablewrap">
+
+<table>
+
+<tr>
+<th>Day</th>
+<th>Batch</th>
+<th>Subject</th>
+<th>Teacher</th>
+<th>Time</th>
+
+{% if session.get("role")=="admin" %}
+<th>Action</th>
+{% endif %}
+
+</tr>
+
+{% for r in routines %}
+
+<tr>
+
+<td>{{r.day_name}}</td>
+<td>{{r.batch}}</td>
+<td>{{r.subject}}</td>
+<td>{{r.teacher}}</td>
+
+<td>
+{{r.start_time}} - {{r.end_time}}
+</td>
+
+{% if session.get("role")=="admin" %}
+
+<td>
+
+<form
+method="post"
+action="/routine/{{r.id}}/delete"
+>
+
+<button class="danger">
+Delete
+</button>
+
+</form>
+
+</td>
+
+{% endif %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

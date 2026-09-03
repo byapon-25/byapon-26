@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student Dashboard</h1>
+{% if student %}
+<p>Welcome, {{ student.name }}</p>
+<p>Student ID: {{ student.student_id }}</p>
+{% endif %}
+<a href="/logout">Logout</a>
+{% endblock %}

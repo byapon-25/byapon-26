@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.att-page{
+    max-width:1200px;
+    margin:auto;
+}
+
+.att-hero{
+    background:linear-gradient(135deg,#ffffff 0%,#f4f8ff 100%);
+    border:1px solid #dbe7f5;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 8px 25px rgba(31,78,121,.08);
+}
+
+.att-hero h1{
+    margin:0 0 6px;
+    color:#174ea6;
+    font-weight:900;
+}
+
+.att-hero p{
+    margin:0;
+    color:#64748b;
+}
+
+.att-filter{
+    display:flex;
+    gap:12px;
+    align-items:end;
+    flex-wrap:wrap;
+}
+
+.att-filter .field{
+    flex:1;
+    min-width:220px;
+}
+
+.att-filter label{
+    display:block;
+    font-weight:800;
+    color:#334155;
+    margin-bottom:6px;
+}
+
+.att-filter input{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px 14px;
+    border:1px solid #cbd8e8;
+    border-radius:12px;
+    background:#fff;
+    color:#1e293b;
+}
+
+.att-filter button{
+    border:0;
+    border-radius:12px;
+    padding:12px 20px;
+    background:#2563eb;
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.att-table-wrap{
+    overflow-x:auto;
+    border-radius:18px;
+    background:#fff;
+    border:1px solid #dbe7f5;
+    box-shadow:0 8px 25px rgba(31,78,121,.07);
+}
+
+.att-table{
+    width:100%;
+    min-width:850px;
+    border-collapse:collapse;
+}
+
+.att-table th{
+    background:#eef5ff;
+    color:#174ea6;
+    font-weight:900;
+    padding:14px;
+    text-align:left;
+    white-space:nowrap;
+}
+
+.att-table td{
+    padding:13px 14px;
+    border-top:1px solid #edf2f7;
+    color:#334155;
+    vertical-align:middle;
+}
+
+.att-table tr:hover td{
+    background:#fafcff;
+}
+
+.att-table select{
+    min-width:125px;
+    padding:9px 10px;
+    border:1px solid #cbd8e8;
+    border-radius:10px;
+    background:#fff;
+    color:#1e293b;
+    font-weight:700;
+}
+
+.att-actions{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.att-edit,
+.att-delete{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 12px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.att-edit{
+    background:#fff8df;
+    color:#9a6700 !important;
+    border:1px solid #e7c85b;
+}
+
+.att-delete{
+    background:#fff1f1;
+    color:#b42318;
+    border:1px solid #efb4b0;
+    cursor:pointer;
+}
+
+.att-save{
+    margin-top:16px;
+    border:0;
+    border-radius:13px;
+    padding:13px 22px;
+    background:linear-gradient(135deg,#2563eb,#174ea6);
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 7px 18px rgba(37,99,235,.2);
+}
+
+.att-status{
+    font-weight:900;
+}
+
+@media(max-width:700px){
+    .att-hero{
+        padding:18px;
+        border-radius:17px;
+    }
+
+    .att-filter{
+        display:block;
+    }
+
+    .att-filter .field{
+        margin-bottom:10px;
+    }
+
+    .att-filter button{
+        width:100%;
+    }
+
+    .att-table-wrap{
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .att-table{
+        min-width:850px;
+    }
+}
+</style>
+
+<div class="att-page">
+
+    <div class="att-hero">
+        <h1>Attendance Management</h1>
+        <p>Manage daily student attendance, edit records and remove incorrect entries.</p>
+    </div>
+
+    <div class="card">
+        <form method="get" class="att-filter">
+
+            <div class="field">
+                <label>Attendance Date</label>
+                <input
+                    type="date"
+                    name="date"
+                    value="{{ selected_date }}"
+                    required
+                >
+            </div>
+
+            <button type="submit">LOAD ATTENDANCE</button>
+
+        </form>
+    </div>
+
+    <br>
+
+    <div class="att-table-wrap">
+
+        <form method="post">
+
+            <input
+                type="hidden"
+                name="date"
+                value="{{ selected_date }}"
+            >
+
+            <table class="att-table">
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Class</th>
+                        <th>Batch</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                {% for s in students %}
+
+                    <tr>
+
+                        <td data-label="Student">
+                            <strong>{{ s.name }}</strong><br>
+                            <small>{{ s.student_id }}</small>
+                        </td>
+
+                        <td data-label="Class">{{ s.class_name }}</td>
+
+                        <td data-label="Batch">{{ s.batch }}</td>
+
+                        <td data-label="Status">
+                            <select
+                                name="status_{{ s.id }}"
+                                class="att-status"
+                            >
+
+                                <option value="Present"
+                                    {% if s.status == "Present" %}selected{% endif %}>
+                                    Present
+                                </option>
+
+                                <option value="Absent"
+                                    {% if s.status == "Absent" %}selected{% endif %}>
+                                    Absent
+                                </option>
+
+                                <option value="Late"
+                                    {% if s.status == "Late" %}selected{% endif %}>
+                                    Late
+                                </option>
+
+                            </select>
+                        </td>
+
+                        <td>
+                            <div class="att-actions">
+
+                                {% if s.attendance_id %}
+                                    <a
+                                        href="{{ url_for('edit_attendance', aid=s.attendance_id) }}"
+                                        class="att-edit"
+                                    >
+                                        EDIT
+                                    </a>
+
+                                    <form
+                                        method="post"
+                                        action="{{ url_for('delete_attendance', aid=s.attendance_id) }}"
+                                        onsubmit="return confirm('Delete this attendance record?');"
+                                        style="margin:0;"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="att-delete"
+                                        >
+                                            DELETE
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <span style="color:#94a3b8;font-size:12px;font-weight:700;">
+                                        Not saved
+                                    </span>
+                                {% endif %}
+
+                            </div>
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+                        <td colspan="5" style="text-align:center;padding:30px;">
+                            No active students found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            <div style="padding:0 16px 18px;">
+                <button type="submit" class="att-save">
+                    SAVE ATTENDANCE
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ATTENDANCE MOBILE FINAL FIX -->
+
+<style>
+@media(max-width:700px){
+
+    .att-table,
+    .att-table tbody{
+        display:block !important;
+        width:100% !important;
+        min-width:0 !important;
+    }
+
+    .att-table thead{
+        display:none !important;
+    }
+
+    .att-table tr{
+        display:block !important;
+        width:100% !important;
+        box-sizing:border-box !important;
+        background:#fff !important;
+        border:1px solid #dbe7f5 !important;
+        border-radius:16px !important;
+        margin:0 0 12px !important;
+        padding:10px !important;
+        overflow:visible !important;
+    }
+
+    .att-table td{
+        display:flex !important;
+        align-items:center !important;
+        justify-content:space-between !important;
+        gap:10px !important;
+        width:100% !important;
+        min-width:0 !important;
+        box-sizing:border-box !important;
+        border:0 !important;
+        padding:9px 4px !important;
+    }
+
+    .att-table td::before{
+        content:attr(data-label);
+        color:#64748b !important;
+        font-weight:900 !important;
+        flex:0 0 auto;
+    }
+
+    .att-table td:last-child{
+        display:block !important;
+        border-top:1px solid #edf2f7 !important;
+        margin-top:5px !important;
+        padding-top:12px !important;
+    }
+
+    .att-table td:last-child::before{
+        display:block !important;
+        margin-bottom:8px !important;
+    }
+
+    .att-actions{
+        display:grid !important;
+        grid-template-columns:1fr 1fr !important;
+        width:100% !important;
+        gap:8px !important;
+    }
+
+    .att-edit,
+    .att-delete{
+        width:100% !important;
+        min-height:42px !important;
+        box-sizing:border-box !important;
+    }
+
+    .att-delete{
+        border:1px solid #efb4b0 !important;
+        background:#fff1f1 !important;
+        color:#b42318 !important;
+    }
+
+    .att-edit{
+        border:1px solid #e7c85b !important;
+        background:#fff8df !important;
+        color:#946b00 !important;
+    }
+}
+</style>
+
+{% endblock %}

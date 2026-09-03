@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Students</h1>
+
+<div class="card">
+
+<form method="get" class="search">
+
+<input
+name="q"
+value="{{q}}"
+placeholder="Search student..."
+>
+
+<button class="btn">
+SEARCH
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<form method="post" class="grid">
+
+<input name="student_id" placeholder="Student ID" required>
+
+<input name="name" placeholder="Student Name" required>
+
+<input name="phone" placeholder="Phone">
+
+<input name="guardian" placeholder="Guardian">
+
+<input name="class_name" placeholder="Class">
+
+<input name="batch" placeholder="Batch">
+
+<input
+name="monthly_fee"
+type="number"
+placeholder="Monthly Fee"
+>
+
+<input
+name="password"
+placeholder="Password (blank = Student ID)"
+>
+
+<button class="btn primary">
+ADD STUDENT
+</button>
+
+</form>
+
+</div>
+
+<div class="card tablewrap">
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Class</th>
+<th>Batch</th>
+<th>Fee</th>
+<th>Action</th>
+</tr>
+
+{% for s in students %}
+
+<tr>
+
+<td>{{s.student_id}}</td>
+
+<td>{{s.name}}</td>
+
+<td>{{s.class_name}}</td>
+
+<td>{{s.batch}}</td>
+
+<td>৳{{s.monthly_fee}}</td>
+
+<td class="actions">
+
+<a
+class="btn small"
+href="/students/{{s.id}}/edit"
+>
+Edit
+</a>
+
+<form
+method="post"
+action="/students/{{s.id}}/delete"
+>
+
+<button class="danger">
+Delete
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

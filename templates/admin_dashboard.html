@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.master-wrap{
+    max-width:1200px;
+    margin:25px auto;
+    padding:15px;
+}
+.master-head{
+    background:#fff;
+    border:1px solid #e7d39a;
+    border-radius:24px;
+    padding:28px;
+    margin-bottom:22px;
+    box-shadow:0 12px 35px rgba(0,0,0,.07);
+}
+.master-head h1{
+    margin:0;
+    color:#b8860b;
+    font-size:30px;
+    font-weight:900;
+}
+.master-head p{
+    margin:8px 0 0;
+    color:#666;
+}
+.master-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+.master-card{
+    background:#fff;
+    border:1px solid #ead9a6;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    transition:.2s;
+}
+.master-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 14px 30px rgba(0,0,0,.10);
+}
+.master-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:#fff8df;
+    color:#b8860b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:900;
+    margin-bottom:14px;
+}
+.master-card h3{
+    margin:0 0 7px;
+    color:#333;
+    font-size:19px;
+}
+.master-card p{
+    color:#777;
+    font-size:13px;
+    min-height:38px;
+    margin-bottom:15px;
+}
+.master-btn{
+    display:inline-block;
+    padding:10px 15px;
+    border-radius:10px;
+    background:#d4a72c;
+    color:#fff !important;
+    text-decoration:none;
+    font-weight:800;
+    font-size:13px;
+}
+.master-btn:hover{
+    background:#b8860b;
+}
+.master-special{
+    border:2px solid #d4a72c;
+}
+@media(max-width:850px){
+    .master-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+@media(max-width:560px){
+    .master-grid{
+        grid-template-columns:1fr;
+    }
+    .master-head h1{
+        font-size:25px;
+    }
+}
+</style>
+
+<div class="master-wrap">
+
+    <div class="master-head">
+        <h1>BYAPON Coaching Center</h1>
+        <p>Master Admin Control Panel — Manage every part of the coaching system.</p>
+    </div>
+
+    <div class="master-grid">
+
+        <div class="master-card">
+            <div class="master-icon">S</div>
+            <h3>Students</h3>
+            <p>Add, edit, delete and search student records.</p>
+            <a class="master-btn" href="{{ url_for('students') }}">MANAGE STUDENTS</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">T</div>
+            <h3>Teachers</h3>
+            <p>Add, edit, delete teachers and manage passwords.</p>
+            <a class="master-btn" href="{{ url_for('teachers') }}">MANAGE TEACHERS</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">A</div>
+            <h3>Attendance</h3>
+            <p>Manage attendance records and corrections.</p>
+            <a class="master-btn" href="{{ url_for('attendance') }}">MANAGE ATTENDANCE</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">E</div>
+            <h3>Exams</h3>
+            <p>Create, edit and delete examinations.</p>
+            <a class="master-btn" href="{{ url_for('exams') }}">MANAGE EXAMS</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">M</div>
+            <h3>Marks & Marksheet</h3>
+            <p>Enter marks and manage student results.</p>
+            <a class="master-btn" href="{{ url_for('exams') }}">MANAGE MARKS</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">F</div>
+            <h3>Fees</h3>
+            <p>Add, edit and delete student fee records.</p>
+            <a class="master-btn" href="{{ url_for('fees') }}">MANAGE FEES</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">৳</div>
+            <h3>Finance</h3>
+            <p>Manage income, expenses and transactions.</p>
+            <a class="master-btn" href="{{ url_for('finance') }}">MANAGE FINANCE</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">R</div>
+            <h3>Routine</h3>
+            <p>Add, edit and delete class routines.</p>
+            <a class="master-btn" href="{{ url_for('routine') }}">MANAGE ROUTINE</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">TA</div>
+            <h3>Teacher Assignments</h3>
+            <p>Assign teachers to batches and subjects.</p>
+            <a class="master-btn" href="{{ url_for('assignments') }}">MANAGE ASSIGNMENTS</a>
+        </div>
+
+        <div class="master-card">
+            <div class="master-icon">N</div>
+            <h3>Notices</h3>
+            <p>Publish, edit and delete coaching notices.</p>
+            <a class="master-btn" href="{{ url_for('notices') }}">MANAGE NOTICES</a>
+        </div>
+
+        <div class="master-card master-special">
+            <div class="master-icon">H</div>
+            <h3>Homepage Programs</h3>
+            <p>Edit the programs displayed on the public homepage.</p>
+            <a class="master-btn" href="{{ url_for('home_programs') }}">EDIT HOMEPAGE</a>
+        </div>
+
+        <div class="master-card master-special">
+            <div class="master-icon">🔐</div>
+            <h3>Users & Passwords</h3>
+            <p>Reset passwords for Admin, Teachers and Students.</p>
+            <a class="master-btn" href="{{ url_for('admin_users') }}">PASSWORD CONTROL</a>
+        </div>
+
+        <div class="master-card master-special">
+            <div class="master-icon">🔑</div>
+            <h3>My Admin Password</h3>
+            <p>Change your own Admin account password securely.</p>
+            <a class="master-btn" href="{{ url_for('admin_password') }}">CHANGE PASSWORD</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

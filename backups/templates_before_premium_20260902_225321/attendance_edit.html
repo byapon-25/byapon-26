@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="premium-edit-page">
+<h2>Edit Attendance</h2>
+<form method="POST">
+<label>Student</label>
+<select name="student_id" required>
+{% for s in students %}
+<option value="{{ s['id'] }}" {% if s['id']==attendance['student_id'] %}selected{% endif %}>
+{{ s['student_id'] }} — {{ s['name'] }}
+</option>
+{% endfor %}
+</select>
+<label>Date</label>
+<input type="date" name="attendance_date" value="{{ attendance['attendance_date'] }}" required>
+<label>Status</label>
+<select name="status" required>
+<option value="Present" {% if attendance['status']=='Present' %}selected{% endif %}>Present</option>
+<option value="Absent" {% if attendance['status']=='Absent' %}selected{% endif %}>Absent</option>
+<option value="Late" {% if attendance['status']=='Late' %}selected{% endif %}>Late</option>
+</select>
+<button type="submit">SAVE CHANGES</button>
+<a href="/attendance">CANCEL</a>
+</form>
+</div>
+{% endblock %}

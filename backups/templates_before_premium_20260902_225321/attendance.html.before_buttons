@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Attendance</h1>
+
+<div class="card">
+
+<form method="get" class="search">
+
+<input
+type="date"
+name="date"
+value="{{selected_date}}"
+>
+
+<button class="btn">
+LOAD
+</button>
+
+</form>
+
+</div>
+
+<div class="card tablewrap">
+
+<form method="post">
+
+<input
+type="hidden"
+name="date"
+value="{{selected_date}}"
+>
+
+<table>
+
+<tr>
+<th>Student</th>
+<th>Class</th>
+<th>Batch</th>
+<th>Status</th>
+</tr>
+
+{% for s in students %}
+
+<tr>
+
+<td>
+{{s.name}} ({{s.student_id}})
+</td>
+
+<td>{{s.class_name}}</td>
+
+<td>{{s.batch}}</td>
+
+<td>
+
+<select name="status_{{s.id}}">
+
+<option
+{% if s.status=="Present" %}
+selected
+{% endif %}
+>
+Present
+</option>
+
+<option
+{% if s.status=="Absent" %}
+selected
+{% endif %}
+>
+Absent
+</option>
+
+</select>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<button class="btn primary">
+SAVE ATTENDANCE
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Teacher Portal • BYAPON{% endblock %}
+{% block content %}
+
+<section class="dashboard-header">
+<div>
+<span>TEACHER PORTAL</span>
+<h1>Teacher Dashboard</h1>
+<p>Manage your academic responsibilities efficiently.</p>
+</div>
+</section>
+
+<div class="dashboard-menu">
+
+<a class="menu-card" href="/attendance">
+<div class="menu-icon">✓</div>
+<h3>Attendance</h3>
+<p>Take and manage student attendance.</p>
+<span>OPEN →</span>
+</a>
+
+<a class="menu-card" href="/exams">
+<div class="menu-icon">🏆</div>
+<h3>Exams & Marks</h3>
+<p>Enter and manage examination marks.</p>
+<span>OPEN →</span>
+</a>
+
+<a class="menu-card" href="/routine">
+<div class="menu-icon">◷</div>
+<h3>Routine</h3>
+<p>View the class schedule.</p>
+<span>VIEW →</span>
+</a>
+
+<a class="menu-card" href="/notices">
+<div class="menu-icon">!</div>
+<h3>Notices</h3>
+<p>Read coaching center notices.</p>
+<span>VIEW →</span>
+</a>
+
+</div>
+
+{% endblock %}

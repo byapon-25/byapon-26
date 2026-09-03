@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="premium-edit-page">
+<h2>Edit Teacher Assignment</h2>
+<form method="POST">
+<label>Teacher</label>
+<select name="teacher_id" required>
+{% for t in teachers %}
+<option value="{{ t['id'] }}" {% if t['id']==assignment['teacher_id'] %}selected{% endif %}>{{ t['name'] }}</option>
+{% endfor %}
+</select>
+<label>Batch</label><input type="text" name="batch" value="{{ assignment['batch'] }}" required>
+<label>Subject</label><input type="text" name="subject" value="{{ assignment['subject'] }}" required>
+<button type="submit">SAVE CHANGES</button>
+<a href="/assignments">CANCEL</a>
+</form>
+</div>
+{% endblock %}

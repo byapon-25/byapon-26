@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Login • BYAPON{% endblock %}
+
+{% block content %}
+
+<section class="login-page">
+
+    <div class="login-brand">
+        <div class="login-logo">B</div>
+        <div>
+            <strong>BYAPON</strong>
+            <span>COACHING CENTER</span>
+        </div>
+    </div>
+
+    <div class="login-box">
+
+        <div class="login-heading">
+            <span>SECURE ACCESS</span>
+            <h1>Welcome back.</h1>
+            <p>Sign in to continue to your BYAPON portal.</p>
+        </div>
+
+        <form method="post" class="premium-form">
+
+            <label>
+                Username / Student ID
+                <input
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+            </label>
+
+            <label>
+                Password
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </label>
+
+            <button type="submit" class="login-submit">
+                <span>Sign In</span>
+                <b>→</b>
+            </button>
+
+        </form>
+
+        <div class="login-footer">
+            <span>Protected BYAPON CMS Access</span>
+            <span>•</span>
+            <span>Secure Portal</span>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

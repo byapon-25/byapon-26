@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="report-card">
+<h1>BYAPON Coaching Center</h1>
+<h2>Fee Report</h2>
+<p><b>Name:</b> {{ student.name }}</p>
+<p><b>Student ID:</b> {{ student.student_id }}</p>
+<table>
+<tr><th>Month</th><th>Fee</th><th>Paid</th><th>Status</th></tr>
+{% for f in fees %}
+<tr><td>{{ f['fee_month'] }}</td><td>{{ f['amount'] }}</td><td>{{ f['paid_amount'] }}</td><td>{{ f['status'] }}</td></tr>
+{% endfor %}
+</table>
+<p><b>Total Fee:</b> {{ total_fee }} | <b>Paid:</b> {{ total_paid }} | <b>Due:</b> {{ total_due }}</p>
+<button onclick="window.print()">PRINT / SAVE PDF</button>
+</div>
+{% endblock %}

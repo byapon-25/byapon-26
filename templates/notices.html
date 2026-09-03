@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.notice-page{
+    max-width:1200px;
+    margin:auto;
+}
+
+.notice-head{
+    background:linear-gradient(135deg,#ffffff,#f4f8ff);
+    border:1px solid #dbe7f5;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 8px 25px rgba(31,78,121,.08);
+}
+
+.notice-head h1{
+    margin:0 0 6px;
+    color:#174ea6;
+    font-weight:900;
+}
+
+.notice-head p{
+    margin:0;
+    color:#64748b;
+}
+
+.notice-form{
+    display:grid;
+    gap:12px;
+}
+
+.notice-form label{
+    font-weight:800;
+    color:#334155;
+}
+
+.notice-form input,
+.notice-form textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px 14px;
+    border:1px solid #cbd8e8;
+    border-radius:12px;
+    background:#fff;
+    color:#1e293b;
+}
+
+.notice-form button{
+    width:max-content;
+    border:0;
+    border-radius:12px;
+    padding:12px 20px;
+    background:#2563eb;
+    color:#fff;
+    font-weight:900;
+}
+
+.notice-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:16px;
+}
+
+.notice-card{
+    background:#fff;
+    border:1px solid #dbe7f5;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 8px 25px rgba(31,78,121,.07);
+}
+
+.notice-title{
+    color:#174ea6;
+    font-size:19px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.notice-message{
+    color:#475569;
+    line-height:1.65;
+    white-space:pre-wrap;
+}
+
+.notice-meta{
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:12px;
+}
+
+.notice-actions{
+    display:flex;
+    gap:8px;
+    margin-top:16px;
+}
+
+.notice-edit{
+    background:#fff8df;
+    color:#9a6700 !important;
+    border:1px solid #e7c85b;
+    padding:8px 12px;
+    border-radius:9px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:900;
+}
+
+.notice-delete{
+    background:#fff1f1;
+    color:#b42318;
+    border:1px solid #efb4b0;
+    padding:8px 12px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+@media(max-width:600px){
+    .notice-head{
+        padding:18px;
+        border-radius:17px;
+    }
+
+    .notice-form button{
+        width:100%;
+    }
+}
+</style>
+
+<div class="notice-page">
+
+    <div class="notice-head">
+        <h1>Notice Board</h1>
+        <p>Publish important announcements and manage existing notices.</p>
+    </div>
+
+    {% if session.get('role') == 'admin' %}
+    <div class="card">
+
+        <form method="post" class="notice-form">
+
+            <label>Notice Title</label>
+            <input
+                type="text"
+                name="title"
+                placeholder="Enter notice title"
+                required
+            >
+
+            <label>Message</label>
+            <textarea
+                name="message"
+                rows="6"
+                placeholder="Write the notice here..."
+                required
+            ></textarea>
+
+            <button type="submit">PUBLISH NOTICE</button>
+
+        </form>
+
+    </div>
+
+    <br>
+    {% endif %}
+
+    <div class="notice-grid">
+
+        {% for n in notices %}
+
+        <div class="notice-card">
+
+            <div class="notice-title">
+                {{ n.title }}
+            </div>
+
+            {% if n.created_at %}
+            <div class="notice-meta">
+                {{ n.created_at }}
+            </div>
+            {% endif %}
+
+            <div class="notice-message">
+                {{ n.message }}
+            </div>
+
+            {% if session.get('role') == 'admin' %}
+            <div class="notice-actions">
+
+                <a
+                    href="{{ url_for('edit_notice', nid=n.id) }}"
+                    class="notice-edit"
+                >
+                    EDIT
+                </a>
+
+                <form
+                    method="post"
+                    action="{{ url_for('delete_notice', nid=n.id) }}"
+                    onsubmit="return confirm('Delete this notice?');"
+                    style="margin:0;"
+                >
+                    <button type="submit" class="notice-delete">
+                        DELETE
+                    </button>
+                </form>
+
+            </div>
+            {% endif %}
+
+        </div>
+
+        {% else %}
+
+        <div class="card" style="text-align:center;padding:35px;">
+            <strong>No notices available.</strong>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

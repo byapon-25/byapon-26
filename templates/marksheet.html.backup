@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+
+<h1>BYAPON Marksheet</h1>
+
+<h2>{{student.name}}</h2>
+
+<p>
+Student ID: {{student.student_id}}
+</p>
+
+<p>
+Class: {{student.class_name}}
+|
+Batch: {{student.batch}}
+</p>
+
+<div class="tablewrap">
+
+<table>
+
+<tr>
+<th>Exam</th>
+<th>Subject</th>
+<th>Full</th>
+<th>Marks</th>
+<th>Status</th>
+</tr>
+
+{% for r in results %}
+
+<tr>
+
+<td>{{r.title}}</td>
+
+<td>{{r.subject}}</td>
+
+<td>{{r.full_marks}}</td>
+
+<td>{{r.marks}}</td>
+
+<td>
+
+{% if r.marks >= r.pass_marks %}
+PASS
+{% else %}
+FAIL
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</div>
+
+{% endblock %}

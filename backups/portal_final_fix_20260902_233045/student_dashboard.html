@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Student Portal • BYAPON{% endblock %}
+{% block content %}
+
+<section class="dashboard-header">
+<div>
+<span>STUDENT PORTAL</span>
+<h1>Welcome, {{ student.name }}</h1>
+<p>Your academic information is available in one place.</p>
+</div>
+</section>
+
+<div class="dashboard-grid">
+<div class="dash-card"><small>STUDENT ID</small><h2 style="font-size:22px">{{ student.student_id }}</h2><p>{{ student.class_name }}</p></div>
+<div class="dash-card"><small>BATCH</small><h2 style="font-size:22px">{{ student.batch }}</h2><p>Current Batch</p></div>
+<div class="dash-card"><small>MONTHLY FEE</small><h2 style="font-size:22px">৳{{ student.monthly_fee }}</h2><p>Monthly Fee</p></div>
+<div class="dash-card"><small>STATUS</small><h2 style="font-size:22px">ACTIVE</h2><p>Student Account</p></div>
+</div>
+
+<div class="section-heading">
+<span>MY ACADEMIC CENTER</span>
+<h2>Everything you need.</h2>
+</div>
+
+<div class="dashboard-menu">
+
+<a class="menu-card" href="/marksheet/{{ student.id }}">
+<div class="menu-icon">🏆</div>
+<h3>My Marksheet</h3>
+<p>View your examination results and marksheet.</p>
+<span>VIEW & PRINT →</span>
+</a>
+
+<a class="menu-card" href="/student-attendance">
+<div class="menu-icon">✓</div>
+<h3>My Attendance</h3>
+<p>Check your attendance record.</p>
+<span>VIEW & PRINT →</span>
+</a>
+
+<a class="menu-card" href="/student-fees">
+<div class="menu-icon">৳</div>
+<h3>My Fees</h3>
+<p>View your payment and fee records.</p>
+<span>VIEW & PRINT →</span>
+</a>
+
+<a class="menu-card" href="/routine">
+<div class="menu-icon">◷</div>
+<h3>Class Routine</h3>
+<p>Check your class schedule.</p>
+<span>VIEW →</span>
+</a>
+
+<a class="menu-card" href="/notices">
+<div class="menu-icon">!</div>
+<h3>Notices</h3>
+<p>Read important coaching notices.</p>
+<span>VIEW →</span>
+</a>
+
+</div>
+
+{% endblock %}

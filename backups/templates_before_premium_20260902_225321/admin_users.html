@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="premium-edit-page">
+<h2>Users & Password Control</h2>
+{% for u in users %}
+<div style="border:1px solid #ead9a6;padding:15px;margin:10px 0;border-radius:12px;background:#fff;">
+<strong>{{ u['username'] }}</strong> — {{ u['role']|upper }}
+<form method="POST" style="margin-top:10px;">
+<input type="hidden" name="user_id" value="{{ u['id'] }}">
+<input type="password" name="password" placeholder="New password" minlength="6" required>
+<button type="submit">RESET PASSWORD</button>
+</form>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

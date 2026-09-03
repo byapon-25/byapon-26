@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard • BYAPON{% endblock %}
+{% block content %}
+
+<section class="dashboard-header">
+<div>
+<span>CONTROL CENTER</span>
+<h1>Admin Dashboard</h1>
+<p>Manage your complete coaching center from one powerful workspace.</p>
+</div>
+<div class="dashboard-actions">
+<a href="/students" class="btn btn-primary">+ Add Student</a>
+<a href="/teachers" class="btn">+ Add Teacher</a>
+</div>
+</section>
+
+<div class="dashboard-grid">
+<div class="dash-card"><small>STUDENTS</small><h2>∞</h2><p>Student Management</p></div>
+<div class="dash-card"><small>TEACHERS</small><h2>∞</h2><p>Teacher Management</p></div>
+<div class="dash-card"><small>ACADEMIC</small><h2>✓</h2><p>Exams & Results</p></div>
+<div class="dash-card"><small>FINANCE</small><h2>৳</h2><p>Fees & Accounts</p></div>
+</div>
+
+<div class="section-heading">
+<span>MANAGEMENT MODULES</span>
+<h2>Everything is under control.</h2>
+</div>
+
+<div class="dashboard-menu">
+<a class="menu-card" href="/students">
+<div class="menu-icon">👨‍🎓</div><h3>Students</h3>
+<p>Add, edit, search and manage students.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/teachers">
+<div class="menu-icon">👨‍🏫</div><h3>Teachers</h3>
+<p>Manage teachers and academic assignments.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/attendance">
+<div class="menu-icon">✓</div><h3>Attendance</h3>
+<p>Track daily student attendance.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/exams">
+<div class="menu-icon">🏆</div><h3>Exams & Marks</h3>
+<p>Create exams and manage marks.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/fees">
+<div class="menu-icon">💳</div><h3>Fees</h3>
+<p>Manage student fee records.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/finance">
+<div class="menu-icon">৳</div><h3>Finance</h3>
+<p>Track income and expenses.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/routine">
+<div class="menu-icon">◷</div><h3>Routine</h3>
+<p>Manage class schedules.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/assignments">
+<div class="menu-icon">▣</div><h3>Assignments</h3>
+<p>Manage academic assignments.</p><span>OPEN →</span>
+</a>
+<a class="menu-card" href="/notices">
+<div class="menu-icon">!</div><h3>Notices</h3>
+<p>Publish important notices.</p><span>OPEN →</span>
+</a>
+</div>
+
+{% endblock %}
