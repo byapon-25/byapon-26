@@ -287,8 +287,8 @@ def students():
         try:
             cur = con.execute("""
                 INSERT INTO students
-                (student_id,name,phone,guardian,class_name,batch,monthly_fee)
-                VALUES(?,?,?,?,?,?,?)
+                (student_id,name,phone,guardian,class_name,batch,monthly_fee,active)
+                VALUES(?,?,?,?,?,?,?,1)
             RETURNING id
             """, (
                 student_id,
@@ -425,8 +425,8 @@ def teachers():
 
         try:
             cur = con.execute("""
-                INSERT INTO teachers(name,phone,subject,salary)
-                VALUES(?,?,?,?)
+                INSERT INTO teachers(name,phone,subject,salary,active)
+                VALUES(?,?,?,?,1)
             RETURNING id
             """, (
                 name,
