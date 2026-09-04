@@ -299,7 +299,7 @@ def students():
                 request.form.get("batch"),
                 float(request.form.get("monthly_fee") or 0)
             ))
-            sid = cur.fetchone()[0]
+            sid = cur.fetchone()["id"]
 
             con.execute("""
                 INSERT INTO users
@@ -434,7 +434,7 @@ def teachers():
                 request.form.get("subject"),
                 float(request.form.get("salary") or 0)
             ))
-            tid = cur.fetchone()[0]
+            tid = cur.fetchone()["id"]
 
             username = request.form.get("username", "").strip() or (
                 "teacher" + str(tid)
