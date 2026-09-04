@@ -289,6 +289,7 @@ def students():
                 INSERT INTO students
                 (student_id,name,phone,guardian,class_name,batch,monthly_fee)
                 VALUES(?,?,?,?,?,?,?)
+            RETURNING id
             """, (
                 student_id,
                 name,
@@ -298,8 +299,7 @@ def students():
                 request.form.get("batch"),
                 float(request.form.get("monthly_fee") or 0)
             ))
-
-            sid = cur.lastrowid
+            sid = cur.fetchone()[0]
 
             con.execute("""
                 INSERT INTO users
@@ -427,14 +427,14 @@ def teachers():
             cur = con.execute("""
                 INSERT INTO teachers(name,phone,subject,salary)
                 VALUES(?,?,?,?)
+            RETURNING id
             """, (
                 name,
                 request.form.get("phone"),
                 request.form.get("subject"),
                 float(request.form.get("salary") or 0)
             ))
-
-            tid = cur.lastrowid
+            tid = cur.fetchone()[0]
 
             username = request.form.get("username", "").strip() or (
                 "teacher" + str(tid)
